@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <TextView
+        android:id="@+id/item_carrinho_produto_nome"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="Bola de futebol" />
+
+    <TextView
+        android:id="@+id/item_carrinho_produto_preco"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/item_carrinho_produto_nome"
+        app:layout_constraintStart_toStartOf="@id/item_carrinho_produto_nome"
+        app:layout_constraintTop_toBottomOf="@id/item_carrinho_produto_nome"
+        app:layout_constraintVertical_bias="0.0"
+        tools:text="R$ 100.00" />
+
+    <ImageButton
+        android:id="@+id/item_carrinho_adicionar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:backgroundTint="@color/cardview_light_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/item_carrinho_quantidade"
+        app:layout_constraintTop_toBottomOf="@id/item_carrinho_produto_preco"
+        app:srcCompat="@drawable/ic_action_adicionar_carrinho"/>
+
+    <ImageButton
+        android:id="@+id/item_carrinho_remover"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:backgroundTint="@color/cardview_light_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/item_carrinho_quantidade"
+        app:layout_constraintStart_toStartOf="@id/item_carrinho_produto_preco"
+        app:layout_constraintTop_toBottomOf="@id/item_carrinho_produto_preco"
+        app:srcCompat="@drawable/ic_action_remover_carrinho" />
+
+    <TextView
+        android:id="@+id/item_carrinho_quantidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:textSize="20sp"
+        android:text="@string/quantidade"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/item_carrinho_quantidade"
+        app:layout_constraintStart_toEndOf="@+id/item_carrinho_remover"
+        app:layout_constraintTop_toBottomOf="@id/item_carrinho_produto_preco" />
+
+    <ImageButton
+        android:id="@+id/item_carrinho_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="120dp"
+        android:backgroundTint="@android:color/white"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_carrinho_produto_nome"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_action_delete" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

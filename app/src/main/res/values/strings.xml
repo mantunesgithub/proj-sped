@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Speed</string>
+    <string name="comprar">ADICIONAR AO CARRINHO</string>
+    <string name="data_de_validade">Data de validade</string>
+    <string name="numero_cartao">Número cartão</string>
+    <string name="numero_cvc">CVC</string>
+    <string name="quantidade">2</string>
+    <string name="confirmar_pagamento">Confirmar pagamento</string>
+</resources>
