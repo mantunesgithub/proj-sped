@@ -20,5 +20,6 @@ data class Carrinho(
     val produtoId: Long,
     val nome: String,
     val preco: BigDecimal,
-    var quantidade: Int
+    var quantidade: Int,
+    val imagem: String? = null
 ): Parcelable

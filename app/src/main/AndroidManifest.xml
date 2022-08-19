@@ -16,6 +16,7 @@
             android:name="br.com.mantunes.sped.MainActivity"
             android:exported="true" />
         <activity android:name="br.com.mantunes.sped.ui.activity.LoginActivity"/>
+        <activity android:name="br.com.mantunes.sped.ui.activity.MainFinalizaPedidoActivity"/>
         <activity android:name="br.com.mantunes.sped.ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>

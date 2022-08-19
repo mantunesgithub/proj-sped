@@ -40,6 +40,7 @@ class AdicionaNoCarrinhoFragment : ClienteBaseLogadoFragment() {
                 produtoId = produto.id,
                 nome = produto.nome,
                 preco = produto.preco,
+                imagem = produto.imagem,
                 quantidade = 1
             )
         } catch (e: NumberFormatException) {

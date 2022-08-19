@@ -40,12 +40,10 @@ class LoginActivity : AppCompatActivity() {
         viewModel.autentica(email, senha).observe(
             this, Observer {
                 it?.let { clienteEncontrado ->
-                    Log.i("TAG1", "{LoginActivity}autentica: $clienteEncontrado achou cliente")
                     val prefs =
                         getSharedPreferences(FILE_PREFERENCE, MODE_PRIVATE) // Declare xml file
                     prefs.edit().putLong(CHAVE_LOGIN_CLIENTE, clienteEncontrado.id).apply()
 
-                    Log.i("{MainActivity}", "autentica: gravou shared")
                     vaiPara(MainActivity::class.java) { finish() }
 
                 } ?: toast("Cliente não encontrado - Cadastrar o Cliente")
@@ -55,7 +53,6 @@ class LoginActivity : AppCompatActivity() {
     fun configuraBotaoCadastrar() {
         login_botao_cadastrar.setOnClickListener {
             it?.let {
-                Log.i("TAG1", "LoginActivity}configuraBotaoCadastrar: chegou ")
                 val clienteFormCadastroFragment: ClienteFormCadastroFragment by inject()
                 setContentView(R.layout.main_activity)
                 transacaoFragment {

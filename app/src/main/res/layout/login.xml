@@ -84,7 +84,6 @@
             app:layout_constraintStart_toStartOf="@id/textInputlayout_senha"
             app:layout_constraintTop_toBottomOf="@id/textInputlayout_senha" />
 
-
         <Button
             android:id="@+id/login_botao_cadastrar"
             android:layout_width="0dp"

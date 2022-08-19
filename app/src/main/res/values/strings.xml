@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">Speed</string>
+    <string name="chave_pix">Chave Pix</string>
     <string name="comprar">ADICIONAR AO CARRINHO</string>
     <string name="data_de_validade">Data de validade</string>
     <string name="numero_cartao">Número cartão</string>
-    <string name="numero_cvc">CVC</string>
+    <string name="numero_cpf_cnpj">cpf/cnpj</string>
+    <string name="numero_celular">celular (00)00000-0000</string>
+    <string name="email">e-mail</string>
+    <string name="aleatoria">chave aleatória</string>
+    <string name="numero_cvc">Código segurança</string>
     <string name="quantidade">2</string>
     <string name="confirmar_pagamento">Confirmar pagamento</string>
 </resources>

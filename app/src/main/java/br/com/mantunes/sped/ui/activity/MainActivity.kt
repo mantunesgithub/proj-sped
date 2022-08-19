@@ -3,6 +3,7 @@ package br.com.mantunes.sped.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -24,6 +25,11 @@ class MainActivity : AppCompatActivity() {
         clienteIdLogin = buscaLoginDoCliente()
         if (clienteIdLogin < 0) {
             vaiParaLogin()
+        }
+        Log.i("TAGtenta", "onCreate: passsou")
+        tentaCarregarDestino()?.let {
+            Log.i("TAGtenta", "onCreate: $it")
+            if (it == "categoria") { irParaListaCategoria(clienteIdLogin) }
         }
         if (savedInstanceState == null) {
             val listaCategoriasFragment: ListaCategoriasFragment by inject()
@@ -64,73 +70,89 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configuraAtualizaMaisUmNoCarrinho(fragment: AtualizaMaisUmNoCarrinhoFragment) {
-        fragment.quandoAtualizaMaisUm = {
-            vaiParaListaCarrinho(clienteIdLogin)
-        }
-        fragment.quandoDeletaCarrinho = {
-            vaiParaListaCarrinho(clienteIdLogin)
+        fragment.apply {
+            quandoAtualizaMaisUm = {
+                vaiParaListaCarrinho(clienteIdLogin)
+            }
+            quandoDeletaCarrinho = {
+                vaiParaListaCarrinho(clienteIdLogin)
+            }
         }
     }
 
     private fun configuraListaCarrinho(fragment: ListaCarrinhoFragment) {
-        fragment.quandoAdicionaCarrinho = { carrinho ->
-            preparaAtualizacaoCarrinho(carrinho, ADICIONA_NO_CARRINHO)
+        fragment.apply {
+            quandoAdicionaCarrinho = { carrinho ->
+                preparaAtualizacaoCarrinho(carrinho, ADICIONA_NO_CARRINHO)
+            }
+            quandoRemoveCarrinho = { carrinho ->
+                preparaAtualizacaoCarrinho(carrinho, REMOVE_DO_CARRINHO)
+            }
+            quandoDeletaCarrinho = { carrinho ->
+                preparaAtualizacaoCarrinho(carrinho, DELETE_DO_CARRINHO)
+            }
+            quandoContinuarComprando = { clienteIdLogin ->
+                irParaListaCategoria(clienteIdLogin)
+            }
+            quandoFinalizaPedido = {clienteIdLogin ->
+                Log.i("{MainFinalizaPedido}", "configuraListaCarrinho: botao finaliz")
+                vaiPara(MainFinalizaPedidoActivity::class.java)
+            }
+            quandoClienteSaiDoApp = ::vaiParaLogin
         }
-        fragment.quandoRemoveCarrinho = { carrinho ->
-            preparaAtualizacaoCarrinho(carrinho, REMOVE_DO_CARRINHO)
-        }
-        fragment.quandoDeletaCarrinho = { carrinho ->
-            preparaAtualizacaoCarrinho(carrinho, DELETE_DO_CARRINHO)
-        }
-        fragment.quandoContinuarComprando = { clienteIdLogin ->
-            irParaListaCategoria(clienteIdLogin)
-        }
-        fragment.quandoClienteSaiDoApp = this::vaiParaLogin
     }
 
     private fun configuraAdicionaNoCarrinho(fragment: AdicionaNoCarrinhoFragment) {
-        fragment.quandoSalvaCarrinho = {
+        fragment.apply {
+            quandoSalvaCarrinho = {
             vaiParaListaCarrinho(clienteIdLogin)
         }
-        fragment.quandoClienteNaoLogado = this::vaiParaLogin
+            quandoClienteNaoLogado = ::vaiParaLogin
+        }
     }
 
     private fun configuraDetalheDoProduto(fragment: DetalhesProdutoFragment) {
-        fragment.quandoProdutoAdiciona = this::irParaAdicionaNoCarrinhoFragment
-        fragment.quandoDetalheProdutoFab = {
-            vaiParaListaCarrinho(clienteIdLogin)
+        fragment.apply {
+            quandoProdutoAdiciona = ::irParaAdicionaNoCarrinhoFragment
+            quandoDetalheProdutoFab = {
+                vaiParaListaCarrinho(clienteIdLogin)
+            }
+            quandoClienteSaiDoApp = ::vaiParaLogin
         }
-        fragment.quandoClienteSaiDoApp = this::vaiParaLogin
     }
 
     private fun configuraListaProdutos(fragment: ListaProdutosFragment) {
-        fragment.quandoProdutoSelecionado = { produtoSelecionado ->
-            val detalhesProdutoFragment: DetalhesProdutoFragment by inject()
-            val argumentos = bundleOf(
-                CHAVE_CLIENTE_ARGS to clienteIdLogin,
-                CHAVE_PRODUTO_ID_ARGS to produtoSelecionado.id
-            )
-            detalhesProdutoFragment.arguments = argumentos
-            transacaoFragment {
-                addToBackStack("R.id.produtos")
-                replace(R.id.container, detalhesProdutoFragment)
+        fragment.apply {
+            quandoProdutoSelecionado = { produtoSelecionado ->
+                val detalhesProdutoFragment: DetalhesProdutoFragment by inject()
+                val argumentos = bundleOf(
+                    CHAVE_CLIENTE_ARGS to clienteIdLogin,
+                    CHAVE_PRODUTO_ID_ARGS to produtoSelecionado.id
+                )
+                detalhesProdutoFragment.arguments = argumentos
+                transacaoFragment {
+                    addToBackStack("R.id.produtos")
+                    replace(R.id.container, detalhesProdutoFragment)
+                }
             }
+            quandoProdutoFab = {
+                vaiParaListaCarrinho(clienteIdLogin)
+            }
+            quandoClienteSaiDoApp = ::vaiParaLogin
         }
-        fragment.quandoProdutoFab = {
-            vaiParaListaCarrinho(clienteIdLogin)
-        }
-        fragment.quandoClienteSaiDoApp = this::vaiParaLogin
     }
 
     private fun configuraListaCategoria(fragment: ListaCategoriasFragment) {
-        fragment.quandoCategoriaSelecionado = { categoriaSelecionado ->
-            irParaListaProdutos(categoriaSelecionado)
+        fragment.apply {
+            quandoCategoriaSelecionado = { categoriaSelecionado ->
+                irParaListaProdutos(categoriaSelecionado)
+            }
+            quandoCategoriaFab = {
+                vaiParaListaCarrinho(clienteIdLogin)
+            }
+            quandoClienteNaoLogado = ::vaiParaLogin
+            quandoClienteSaiDoApp = ::vaiParaLogin
         }
-        fragment.quandoCategoriaFab = {
-            vaiParaListaCarrinho(clienteIdLogin)
-        }
-        fragment.quandoClienteNaoLogado = this::vaiParaLogin
-        fragment.quandoClienteSaiDoApp = this::vaiParaLogin
     }
 
     fun irParaListaCategoria(clienteIdLogin: Long) {
@@ -158,9 +180,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun vaiParaListaCarrinho(clienteIdLogin: Long) {
-//        val listaCat = supportFragmentManager.getBackStackEntryAt(0).name
-//        supportFragmentManager.popBackStack(listaCat, FragmentManager.POP_BACK_STACK_INCLUSIVE)
-//        println("Conteudo de = $listaCat")
         val listaCarrinhoFragment: ListaCarrinhoFragment by inject()
         val argumentos = bundleOf(CHAVE_CLIENTE_ARGS to clienteIdLogin)
         listaCarrinhoFragment.arguments = argumentos
@@ -204,9 +223,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun buscaLoginDoCliente(): Long {
+    fun buscaLoginDoCliente(): Long {
         val sp = getSharedPreferences(FILE_PREFERENCE, MODE_PRIVATE)
         val clienteIdLogin: Long = sp.getLong(CHAVE_LOGIN_CLIENTE, -1)
         return clienteIdLogin
+    }
+
+    private fun tentaCarregarDestino(): String? {
+        Log.i("TAGMAIN", "tentaCarregarDestino: chegou")
+ //       var destino = intent.getStringExtra(CHAVE_DESTINO)
+ //       val destino = intent.extras?.getString(CHAVE_DESTINO)
+        val destino = intent.getStringExtra(CHAVE_DESTINO)
+        Log.i("TAGMAIN", "tentaCarregarDestino: $destino")
+        return destino
     }
 }

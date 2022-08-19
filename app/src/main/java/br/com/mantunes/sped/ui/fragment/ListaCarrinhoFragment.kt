@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.extensions.formatParaMoedaBrasileira
 import br.com.mantunes.sped.model.Carrinho
+import br.com.mantunes.sped.ui.fragment.extensions.mostraErro
 import br.com.mantunes.sped.ui.recyclerview.adapter.CarrinhoAdapter
 import br.com.mantunes.sped.ui.viewmodel.CarrinhoViewModel
 import kotlinx.android.synthetic.main.lista_carrinho.*
@@ -27,6 +28,7 @@ class ListaCarrinhoFragment : ClienteBaseLogadoFragment() {
     var quandoRemoveCarrinho: (carrinho: Carrinho) -> Unit = {}
     var quandoDeletaCarrinho: (carrinho: Carrinho) -> Unit = {}
     var quandoContinuarComprando: (clienteIdLogin : Long) -> Unit = {}
+    var quandoFinalizaPedido: (clienteIdLogin : Long) -> Unit = {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,13 +52,23 @@ class ListaCarrinhoFragment : ClienteBaseLogadoFragment() {
         viewModel.buscaTodos(clienteIdLogado).observe(this,
             Observer { carrinhoEncontrado ->
 
-                carrinhoEncontrado?.let {listaCarrinhoCliente->
+                carrinhoEncontrado?.let { listaCarrinhoCliente ->
                     adapter.atualiza(listaCarrinhoCliente)
                     imprimeTotalCarrinho(listaCarrinhoCliente)
-                    item_carrinho_botao_continuar.setOnClickListener { continuarComprando ->
+                    lista_carrinho_botao_continuar_comprando.setOnClickListener { continuarComprando ->
                         continuarComprando?.let { quandoContinuarComprando(clienteIdLogado) }
+
+                    }
+                    lista_carrinho_botao_finalizar_pedido.setOnClickListener { finalizaPedido ->
+                        finalizaPedido?.let {
+                            if (listaCarrinhoCliente.isNotEmpty()) {
+                                quandoFinalizaPedido(clienteIdLogado)
+                            } else {
+                                mostraErro("Carrinho está vazio")
+                            }
+                        }
+                    }
                 }
-            }
         })
     }
     override fun onCreateView(
@@ -99,6 +111,6 @@ class ListaCarrinhoFragment : ClienteBaseLogadoFragment() {
         }
         val totalTexto = TOTAL_CARRINHO +
                                 totalCarrinho.formatParaMoedaBrasileira()
-        item_carrinho_valor_total.text = totalTexto
+        lista_carrinho_valor_total.text = totalTexto
     }
 }

@@ -1,30 +1,28 @@
 package br.com.mantunes.sped.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
-import br.com.mantunes.sped.model.enum.ESTADO_PAGAMENTO
 import br.com.mantunes.sped.model.enum.TIPO_PAGAMENTO
+import kotlinx.android.parcel.Parcelize
 import java.math.BigDecimal
 @Entity(
     foreignKeys = [ForeignKey(
-        entity = Pagamento::class,
+        entity = ItensDoPedido::class,
         parentColumns = ["id"],
         childColumns = ["idPedido"]
     )],
     indices = [Index("idPedido")]
 )
-data class Pagamento(
+data class ItensDoPedido(
     @PrimaryKey(autoGenerate = true)
-    var id: Long,
-    var tipoPagamento: TIPO_PAGAMENTO,
-    var estadoPagamento: ESTADO_PAGAMENTO,
-    var numeroCartao: Long,
-    var dataValidadeCartao: String,
-    var cvcCartao: Int,
-    var numeroParcelasCartao: Int,
-    var dataVencimentoBoleto: String,
-    var chavePix: String,
-    var idPedido: Long
+    val id: Long ,
+    val idProduto: Long,
+    val preco: BigDecimal,
+    val desconto: BigDecimal,
+    val quantidade: Int,
+    val idPedido: Long,
+    val imagem: String?
 )

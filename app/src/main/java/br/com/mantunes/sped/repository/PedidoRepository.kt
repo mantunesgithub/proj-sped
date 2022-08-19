@@ -2,25 +2,24 @@ package br.com.mantunes.sped.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import br.com.mantunes.sped.database.dao.PagamentoDAO
-import br.com.mantunes.sped.model.Pagamento
+import br.com.mantunes.sped.database.dao.PedidoDAO
+import br.com.mantunes.sped.model.Pedido
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class PagamentoRepository(private val dao: PagamentoDAO) {
+class PedidoRepository(private val dao: PedidoDAO) {
 
     private val job = Job()
     private val scope = CoroutineScope(Dispatchers.IO + job)
 
-    fun salva(pagamento: Pagamento): LiveData<Resource<Long>> {
+    fun salva(pedido: Pedido): LiveData<Resource<Long>> {
         return MutableLiveData<Resource<Long>>().also { liveDate ->
             scope.launch {
-                val idPagamento = dao.salva(pagamento)
-                liveDate.postValue(Resource(idPagamento))
+                val idPedido = dao.salva(pedido)
+                liveDate.postValue(Resource(idPedido))
             }
         }
     }
-
 }

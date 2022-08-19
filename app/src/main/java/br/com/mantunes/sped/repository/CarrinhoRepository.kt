@@ -20,7 +20,6 @@ class CarrinhoRepository (private val daoCarrinho: CarrinhoDAO) {
             scope.launch {
                 try {
                     daoCarrinho.inclui(carrinho)
-                    Log.i("Carrinho Repository", "inclui: passou try")
                     liveDate.postValue(Resource(carrinho.idCliente))
                 } catch (e: Exception) {
                     Log.e("Carrinho Repository", "inclui: $e", )
@@ -40,6 +39,13 @@ class CarrinhoRepository (private val daoCarrinho: CarrinhoDAO) {
         return MutableLiveData<Resource<Long>>().also { liveDate ->
             scope.launch {
                 daoCarrinho.delete(carrinho)
+            }
+        }
+    }
+    fun exclui(clienteId: Long): LiveData<Resource<Void>> {
+        return MutableLiveData<Resource<Void>>().also { liveDate ->
+            scope.launch {
+                daoCarrinho.exclui(clienteId)
             }
         }
     }

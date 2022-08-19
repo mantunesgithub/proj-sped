@@ -3,6 +3,34 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/drawable/ic_action_adicionar_carrinho.xml" value="0.2025" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/drawable/placeholder.xml" value="0.2" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/drawable/spinner_parcelas.xml" value="0.2" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/detalhes_produto.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/endereco.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/enderecos.xml" value="0.264" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/forma_pagamento.xml" value="0.25" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/formulario_cadastro_cliente.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/item_carrinho.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/item_categoria.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/item_endereco.xml" value="0.264" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/item_pedido_itens.xml" value="0.264" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/item_produto.xml" value="0.1" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/lista_carrinho.xml" value="0.1" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/lista_categoria.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/lista_endereco.xml" value="0.2" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/lista_pedido.xml" value="0.264" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/lista_produtos.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/login.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/main_activity.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/pagamento.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/pagamento_com_cartao.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/pagamento_com_pix.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/parcelas_cartao.xml" value="0.3109375" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/registra_pedido.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/layout/registro_pedido.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/menu/menu_lista_categoria.xml" value="0.32916666666666666" />
+        <entry key="..\:/ws-alura-android-kotlin/projma-sped-1/app/src/main/res/xml/sp_parcelas.xml" value="0.32916666666666666" />
         <entry key="..\:/ws-alura-android-kotlin/projma-sped-passo/app/src/main/res/drawable/ic_action_adicionar_carrinho.xml" value="0.216" />
         <entry key="..\:/ws-alura-android-kotlin/projma-sped-passo/app/src/main/res/drawable/ic_action_carrinho.xml" value="0.19" />
         <entry key="..\:/ws-alura-android-kotlin/projma-sped-passo/app/src/main/res/drawable/ic_action_carrinhos.xml" value="0.2145" />

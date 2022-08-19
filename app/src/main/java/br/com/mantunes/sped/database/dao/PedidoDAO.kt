@@ -2,10 +2,11 @@ package br.com.mantunes.sped.database.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
-import br.com.mantunes.sped.model.Pagamento
+import br.com.mantunes.sped.model.Pedido
 
 @Dao
-interface PagamentoDAO {
+interface PedidoDAO {
     @Insert
-    fun salva(pagamento: Pagamento) : Long
+
+    fun salva(pedido: Pedido) : Long
 }
