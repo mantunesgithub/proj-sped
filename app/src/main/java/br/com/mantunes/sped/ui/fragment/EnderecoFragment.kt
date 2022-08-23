@@ -40,13 +40,11 @@ class EnderecoFragment : ClienteBaseLogadoFragment() {
     }
 
     private fun formataPedidoDTOcliente() {
-        Log.i("TAG", "formataPedidoDTOcliente: com clinete logado $clienteLogado ")
         viewModelCliente.buscaPorId(clienteIdLogado).observe(this, Observer {clienteObserver->
             clienteObserver?.let { cliente ->
                 pedidoDTO?.clienteLogado =  cliente
                 buscaEnderecos()
                 configuraEndereco()
-                Log.i("extende 1", "buscaClienteLogado: ${pedidoDTO?.clienteLogado}")
             }
         })
     }
@@ -64,7 +62,6 @@ class EnderecoFragment : ClienteBaseLogadoFragment() {
     }
     private fun formataPedidoDTOenderecoEscolhido(enderecoEscolhido: Endereco) {
         pedidoDTO?.enderecoEscolhido = enderecoEscolhido
-        printPedidoDTO()
         quandoEnderecoSelecionado(pedidoDTO)
     }
     private fun buscaEnderecos() {
@@ -101,9 +98,4 @@ class EnderecoFragment : ClienteBaseLogadoFragment() {
             }
         })
     }
-
-    private fun printPedidoDTO() {
-            Log.i("Print Pedido ", "{Dados Cliente/Endereco}:  " +
-            "Cliente:  ${pedidoDTO?.clienteLogado} Endereco: ${pedidoDTO?.enderecoEscolhido}" )
-        }
 }

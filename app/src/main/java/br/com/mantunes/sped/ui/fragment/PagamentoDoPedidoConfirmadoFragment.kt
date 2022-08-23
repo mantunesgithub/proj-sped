@@ -20,7 +20,6 @@ class PagamentoDoPedidoConfirmadoFragment : ClienteBaseLogadoFragment() {
     private val viewModelPagamento: PagamentoViewModel by viewModel()
 
     var quandoPedidoSalvo: (idPedido: Long) -> Unit = {}
-    var quandoItensDoPedidoSalvo: () -> Unit = {}
     var quandoPagamentoSalvo: (idPedido: Long) -> Unit = {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,7 +79,6 @@ class PagamentoDoPedidoConfirmadoFragment : ClienteBaseLogadoFragment() {
     fun geraItensDoPedidoDoCliente(idPedido: Long, carrinho: Carrinho) {
         geraItensDoPedido(idPedido, carrinho)?.let { itensDoPedido ->
             this.salvaItensDoPedido(itensDoPedido)
-            Log.i("Itens Pedido", "geraItensDoPedidoDoCliente: $itensDoPedido")
         } ?: Toast.makeText(
             context, FALHA_AO_CRIAR_ITENS_PEDIDO, Toast.LENGTH_LONG
         ).show()
@@ -106,7 +104,6 @@ class PagamentoDoPedidoConfirmadoFragment : ClienteBaseLogadoFragment() {
         viewModelItensDoPedido.salva(itensDoPedido)
             .observe(this, Observer {
                 it?.dado?.let {
-                    Log.i("Salvou itens", "salvaItensDoPedido: id $it")
                 }
             })
     }
@@ -116,7 +113,6 @@ class PagamentoDoPedidoConfirmadoFragment : ClienteBaseLogadoFragment() {
     fun geraPagamentoDoPedido(idPedido: Long) {
         geraPagamento(idPedido)?.let { pagamento ->
             this.salvaPagamento(pagamento)
-            Log.i("Salva Pagto", "geraPagamentoDoPedido: $pagamento")
         } ?: Toast.makeText(
             context, FALHA_AO_CRIAR_PAGAMENTO, Toast.LENGTH_LONG
         ).show()
@@ -150,9 +146,7 @@ class PagamentoDoPedidoConfirmadoFragment : ClienteBaseLogadoFragment() {
         viewModelPagamento.salva(pagamento)
             .observe(this, Observer {
                 it?.dado?.let {
-                    Log.i("Pagamento ", "salvaPagamento: Salvou pagamento idPagagmento $it")
                 }
             })
     }
-
 }

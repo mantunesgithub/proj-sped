@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.extensions.vaiPara
 import br.com.mantunes.sped.model.*
+import br.com.mantunes.sped.model.enum.ESTADO_PAGAMENTO
 import br.com.mantunes.sped.model.enum.TIPO_PAGAMENTO
 import br.com.mantunes.sped.ui.fragment.*
 import org.koin.android.ext.android.inject
@@ -59,6 +60,7 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
                 confirmaPagamentoBoletoFragment(fragment)
             }
             is PedidoFragment -> {
+                Log.i("VoltarIs", "onAttachFragment: ")
                 pagamentoDoPedidoConfirmadoFragment(fragment)
             }
             is PagamentoDoPedidoConfirmadoFragment -> {
@@ -71,9 +73,6 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
                         putExtra(CHAVE_DESTINO, "categoria")
                         startActivity(this)
                     }
-//                    val intent = Intent(this, MainActivity::class.java)
-//                    intent.putExtra(CHAVE_DESTINO, "categoria")
-//                    startActivity(intent)
                 }
                 fragment.quandoClienteSaiDoApp = ::vaiParaLogin
             }
@@ -81,9 +80,16 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
     }
 
     private fun pagamentoDoPedidoConfirmadoFragment(fragment: PedidoFragment) {
+        fragment.quandoBotaoVoltar = {
+            Intent(this, MainActivity::class.java).apply {
+                putExtra(CHAVE_DESTINO, "categoria")
+                startActivity(this)
+            }
+
+        }
+
         fragment.apply {
             quandoConfirmaPedido = { pedidoDTOPagamentoConfirmado ->
-                printPedidoDTO(pedidoDTOPagamentoConfirmado)
                 configuraConfirmarPagamentoDoPedido(pedidoDTOPagamentoConfirmado)
             }
         }
@@ -140,8 +146,6 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
             addToBackStack(null)
             replace(R.id.container, pedidoFragment)
         }
-        Log.i("TAG", "pedidoDTO")
-        printPedidoDTO(pedidoDTOComPagamento)
     }
 
     private fun configuraPagamentoDoPedidoConfirmadoFragment(fragment: PagamentoDoPedidoConfirmadoFragment) {
@@ -155,7 +159,6 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
                 )
                 pagamentoRegistradoFragment.arguments = argumentos
                 transacaoFragment {
-                    addToBackStack(null)
                     replace(R.id.container, pagamentoRegistradoFragment)
                 }
             }
@@ -255,21 +258,6 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
         return PedidoDTO(
             TIPO_PAGAMENTO.PIX, 0L, "", 0, 0, "",
             "", clienteLogado, endereco, listaCarrinho
-        )
-    }
-
-    fun printPedidoDTO(pedidoDTO: PedidoDTO?) {
-        Log.i(
-            "Print Pedido ", "{printPedidoDTO Pagamento Com Cartão}:  " +
-                    "parcelas: ${pedidoDTO?.numeroParcelasCartao} " +
-                    "nr cartao: ${pedidoDTO?.numeroCartao} " +
-                    "cvc: ${pedidoDTO?.cvcCartao} " +
-                    "tipo: ${pedidoDTO?.tipoPagamento} " +
-                    "ch pix: ${pedidoDTO?.chavePix} " +
-                    "dataValidade: ${pedidoDTO?.dataValidadeCartao} " +
-                    "carrinho: ${pedidoDTO?.listaCarrinhoDoCliente} " +
-                    "endereco: ${pedidoDTO?.enderecoEscolhido} " +
-                    "cliente: ${pedidoDTO?.clienteLogado} "
         )
     }
 }

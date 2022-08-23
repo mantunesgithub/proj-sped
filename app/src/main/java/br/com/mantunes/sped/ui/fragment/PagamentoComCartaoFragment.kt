@@ -7,12 +7,13 @@ import android.widget.*
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.model.PedidoDTO
 import br.com.mantunes.sped.model.enum.TIPO_PAGAMENTO
+import br.com.mantunes.sped.ui.fragment.extensions.mostraErro
 import kotlinx.android.synthetic.main.pagamento_com_cartao.*
 
 class PagamentoComCartaoFragment : ClienteBaseLogadoFragment() {
 
     private var parcelas: String = ""
-    var quandoPagamentoComCartao: (pedidoDTOComCartao:PedidoDTO?) -> Unit = {}
+    var quandoPagamentoComCartao: (pedidoDTOComCartao: PedidoDTO?) -> Unit = {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,30 +27,56 @@ class PagamentoComCartaoFragment : ClienteBaseLogadoFragment() {
         )
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = TITULO_APPBAR_FORMA_PAGAMENTO
         buscaClienteLogado()
         configuraParcelasCartao()
         configuraBotaoProximo()
-//        quandoPagamentoComCartao
     }
 
     private fun configuraBotaoProximo() {
+        Log.i("entrou", "configuraBotaoProximo: ")
         pagamento_cartao_botao_proximo.setOnClickListener {
-            atualizaPedidoDTO()
-            printPedidoDTO()
-            quandoPagamentoComCartao(pedidoDTO)
+            it?.let {
+                Log.i("clicou", "configuraBotaoProximo: ")
+                validaDadosDoCartao().let {resultadoValidacaoCartao->
+                    if (resultadoValidacaoCartao == "ok" ) {
+                        Log.i("ok", "configuraBotaoProximo: ")
+                        atualizaPedidoDTO()
+                        quandoPagamentoComCartao(pedidoDTO)
+                    }
+                }
+            }
         }
+    }
+
+    private fun validaDadosDoCartao(): String {
+        Log.i("entrou", "validaDadosDoCartao: ")
+        var dadosDoCartaoEstaValido = "ok"
+
+        if (pagamento_cartao_numero_cartao.text.toString() == null ||
+            pagamento_cartao_numero_cartao.text.toString() == "") {
+            mostraErro("Preencher numero do cartao")
+            dadosDoCartaoEstaValido = "erro"
+        }
+        if (pagamento_cartao_data_validade.text.toString() == null ||
+            pagamento_cartao_data_validade.text.toString() == "") {
+            mostraErro("Preencher data validade do cartao")
+            dadosDoCartaoEstaValido = "erro"
+        }
+        if (pagamento_cartao_cvc.text.toString() == null ||
+            pagamento_cartao_cvc.text.toString() == "") {
+            mostraErro("Preencher cvc do cartao")
+            dadosDoCartaoEstaValido = "erro"
+        }
+        return dadosDoCartaoEstaValido
     }
 
     private fun atualizaPedidoDTO() {
         pedidoDTO?.numeroCartao = pagamento_cartao_numero_cartao.text.toString().toLong()
-        pedidoDTO?.dataValidadeCartao = pagamento_cartao_data_validade.text.toString()
         pedidoDTO?.cvcCartao = pagamento_cartao_cvc.text.toString().toInt()
+        pedidoDTO?.dataValidadeCartao = pagamento_cartao_data_validade.text.toString()
         pedidoDTO?.numeroParcelasCartao = parcelas.toInt()
         pedidoDTO?.tipoPagamento = TIPO_PAGAMENTO.CARTAO
     }

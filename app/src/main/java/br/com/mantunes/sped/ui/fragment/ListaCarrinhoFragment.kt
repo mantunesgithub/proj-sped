@@ -1,6 +1,7 @@
 package br.com.mantunes.sped.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.LinearLayout.VERTICAL
 import androidx.lifecycle.Observer
@@ -55,9 +56,9 @@ class ListaCarrinhoFragment : ClienteBaseLogadoFragment() {
                 carrinhoEncontrado?.let { listaCarrinhoCliente ->
                     adapter.atualiza(listaCarrinhoCliente)
                     imprimeTotalCarrinho(listaCarrinhoCliente)
+
                     lista_carrinho_botao_continuar_comprando.setOnClickListener { continuarComprando ->
                         continuarComprando?.let { quandoContinuarComprando(clienteIdLogado) }
-
                     }
                     lista_carrinho_botao_finalizar_pedido.setOnClickListener { finalizaPedido ->
                         finalizaPedido?.let {

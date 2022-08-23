@@ -63,16 +63,13 @@ class PagamentoRegistradoFragment : ClienteBaseLogadoFragment() {
 
     private fun configuraBotaoContinuarComprando() {
         pagamento_pedido_registrado_botao_continuar.setOnClickListener {
-            it?.let {
-                quandoReiniciaCompras() }
+            it?.let { quandoReiniciaCompras() }
         }
-
     }
     private fun excluiCarrinhoDoCliente() {
         viewModel.exclui(clienteIdLogado)
             .observe(this, Observer { idRetorno ->
                 idRetorno?.dado?.let {
-                    Log.i("Excluiu Carrinho!!!", "onViewCreated: $it")
                 }
             })
     }

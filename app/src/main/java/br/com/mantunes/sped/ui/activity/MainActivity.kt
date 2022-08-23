@@ -26,10 +26,12 @@ class MainActivity : AppCompatActivity() {
         if (clienteIdLogin < 0) {
             vaiParaLogin()
         }
-        Log.i("TAGtenta", "onCreate: passsou")
         tentaCarregarDestino()?.let {
-            Log.i("TAGtenta", "onCreate: $it")
-            if (it == "categoria") { irParaListaCategoria(clienteIdLogin) }
+//            intent.removeExtra(CHAVE_DESTINO)
+            if (it == "categoria") { vaiParaListaCategoria(clienteIdLogin) }
+            if (it == "carrinho") {
+                Log.i("CarrinhoGo", "onCreate: {MainActivity}")
+                vaiParaListaCarrinho(clienteIdLogin) }
         }
         if (savedInstanceState == null) {
             val listaCategoriasFragment: ListaCategoriasFragment by inject()
@@ -92,10 +94,9 @@ class MainActivity : AppCompatActivity() {
                 preparaAtualizacaoCarrinho(carrinho, DELETE_DO_CARRINHO)
             }
             quandoContinuarComprando = { clienteIdLogin ->
-                irParaListaCategoria(clienteIdLogin)
+                vaiParaListaCategoria(clienteIdLogin)
             }
             quandoFinalizaPedido = {clienteIdLogin ->
-                Log.i("{MainFinalizaPedido}", "configuraListaCarrinho: botao finaliz")
                 vaiPara(MainFinalizaPedidoActivity::class.java)
             }
             quandoClienteSaiDoApp = ::vaiParaLogin
@@ -155,13 +156,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun irParaListaCategoria(clienteIdLogin: Long) {
+    fun vaiParaListaCategoria(clienteIdLogin: Long) {
         val listaCategoriasFragment: ListaCategoriasFragment by inject()
         val argumentos = bundleOf(
             CHAVE_CLIENTE_ARGS to clienteIdLogin
         )
         listaCategoriasFragment.arguments = argumentos
         transacaoFragment {
+            addToBackStack("R.id.categoria")
             replace(R.id.container, listaCategoriasFragment)
         }
     }
@@ -230,11 +232,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun tentaCarregarDestino(): String? {
-        Log.i("TAGMAIN", "tentaCarregarDestino: chegou")
- //       var destino = intent.getStringExtra(CHAVE_DESTINO)
- //       val destino = intent.extras?.getString(CHAVE_DESTINO)
         val destino = intent.getStringExtra(CHAVE_DESTINO)
-        Log.i("TAGMAIN", "tentaCarregarDestino: $destino")
         return destino
     }
 }

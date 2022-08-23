@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pagamento_boleto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/pagamento_boleto_tipo_txv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Pagamento com Boleto Bancário"
+        android:textSize="24sp"
+        android:textStyle="normal"/>
+
+    <ImageView
+        android:id="@+id/pagamento_com_boleto_imagem_codigo_barra"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pagamento_boleto_tipo_txv"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_codigo_barras" />
+
+    <TextView
+        android:id="@+id/pagamento_com_boleto_data_vecimento_txv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data de vencimento"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toEndOf="@id/pagamento_com_boleto_imagem_codigo_barra"
+        app:layout_constraintTop_toTopOf="@id/pagamento_com_boleto_imagem_codigo_barra" />
+
+    <TextView
+        android:id="@+id/pagamento_com_boleto_data_vecimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/pagamento_com_boleto_imagem_codigo_barra"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pagamento_com_boleto_data_vecimento_txv"
+        app:layout_constraintHorizontal_bias="0.05"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:hint="20/10/2022"/>
+
+    <ImageView
+        android:id="@+id/pagamento_com_boleto_imagem_nfe"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pagamento_com_boleto_imagem_codigo_barra"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_nfe" />
+
+    <TextView
+        android:id="@+id/pagamento_com_boleto_dados_txv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dados para sua nota fiscal eletrônica"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toEndOf="@id/pagamento_com_boleto_imagem_nfe"
+        app:layout_constraintTop_toTopOf="@id/pagamento_com_boleto_imagem_nfe" />
+
+    <TextView
+        android:id="@+id/pagamento_com_boleto_nome_cpfcnpj_cliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/pagamento_com_boleto_imagem_nfe"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pagamento_com_boleto_dados_txv"
+        app:layout_constraintHorizontal_bias="0.07"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:hint="Marcio Antunes - 127.030.468-30"/>
+
+    <TextView
+        android:id="@+id/pagamento_com_boleto_prazo_txv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="O boleto tem prazo de compensação de 5 dias corridos. Não reservamos estoque até que o pgamento seja aprovado."
+        android:textSize="16sp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="@id/pagamento_com_boleto_imagem_nfe"
+        app:layout_constraintTop_toBottomOf="@id/pagamento_com_boleto_imagem_nfe" />
+
+    <Button
+        android:id="@+id/pagamento_com_boleto_botao_proximo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="PRÓXIMO"
+        android:textColor="@color/design_default_color_background"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/pagamento_com_boleto_imagem_codigo_barra"
+        app:layout_constraintTop_toBottomOf="@id/pagamento_com_boleto_prazo_txv"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

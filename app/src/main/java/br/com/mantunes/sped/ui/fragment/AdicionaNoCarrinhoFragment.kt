@@ -57,8 +57,4 @@ class AdicionaNoCarrinhoFragment : ClienteBaseLogadoFragment() {
             })
         quandoSalvaCarrinho(carrinho.idCliente)
     }
-
-    private fun carrinhoDuplicado(it: Resource<Long>) {
-        (quandoSalvaCarrinho)
-    }
 }

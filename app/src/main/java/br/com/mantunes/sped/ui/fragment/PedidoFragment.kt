@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.extensions.formatParaMoedaBrasileira
 import br.com.mantunes.sped.extensions.stringToDate
-import br.com.mantunes.sped.extensions.toString
 import br.com.mantunes.sped.model.Carrinho
 import br.com.mantunes.sped.model.PedidoDTO
 import br.com.mantunes.sped.model.enum.TIPO_PAGAMENTO
@@ -23,7 +22,6 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.math.BigDecimal
 import java.text.SimpleDateFormat
-import java.util.*
 
 class PedidoFragment : ClienteBaseLogadoFragment() {
 
@@ -31,6 +29,7 @@ class PedidoFragment : ClienteBaseLogadoFragment() {
     private val viewModel: CarrinhoViewModel by viewModel { parametersOf(clienteIdLogado) }
     private val adapter: ItensDoPedidoAdapter by inject()
     var quandoConfirmaPedido: (pedidoDTO: PedidoDTO?) -> Unit = {}
+    var quandoBotaoVoltar: () -> Unit = {}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,10 +49,17 @@ class PedidoFragment : ClienteBaseLogadoFragment() {
         configuraRecyclerView()
         buscaCarrinhoComItensPedido()
         configuraBotaoFinalizarPedido()
+        configuraBotaoVoltar()
     }
     private fun configuraBotaoFinalizarPedido() {
         lista_pedido_botao_confirmar_pedido.setOnClickListener { confirmaPedido ->
             confirmaPedido?.let { quandoConfirmaPedido(pedidoDTO) }
+        }
+    }
+    private fun configuraBotaoVoltar() {
+        lista_pedido_botao_voltar.setOnClickListener { voltar ->
+            voltar?.let {
+                quandoBotaoVoltar() }
         }
     }
 
@@ -122,20 +128,5 @@ class PedidoFragment : ClienteBaseLogadoFragment() {
         val totalTexto = TOTAL_CARRINHO +
                 totalCarrinho.formatParaMoedaBrasileira()
         lista_pedido_valor_total.text = totalTexto
-    }
-    fun printPedidoDTO(pedidoDTO: PedidoDTO?) {
-        Log.i(
-            "Print Pedido fechando", "{printPedidoDTO Fechando}:  " +
-                    "parcelas: ${pedidoDTO?.numeroParcelasCartao} " +
-                    "nr cartao: ${pedidoDTO?.numeroCartao} " +
-                    "cvc: ${pedidoDTO?.cvcCartao} " +
-                    "tipo: ${pedidoDTO?.tipoPagamento} " +
-                    "ch pix: ${pedidoDTO?.chavePix} " +
-                    "dataValidade: ${pedidoDTO?.dataValidadeCartao} " +
-                    "dataVenctoBoleto: ${pedidoDTO?.dataVencimentoBoleto} " +
-                    "carrinho: ${pedidoDTO?.listaCarrinhoDoCliente} " +
-                    "endereco: ${pedidoDTO?.enderecoEscolhido} " +
-                    "cliente: ${pedidoDTO?.clienteLogado} "
-        )
     }
 }
