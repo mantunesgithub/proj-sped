@@ -93,6 +93,7 @@
         android:layout_margin="20dp"
         android:clickable="true"
         android:focusable="true"
+        app:tint="#FFFFFF"
         android:backgroundTint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

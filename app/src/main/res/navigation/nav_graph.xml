@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/home_fragment">
+
+    <fragment
+        android:id="@+id/home_fragment"
+        tools:layout="@layout/home_fragment"
+        android:name="br.com.mantunes.sped.ui.fragment.HomeFragment"
+        android:label="@string/txv_inicio" >
+        <action
+            android:id="@+id/action_homeFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_loginActivity"
+            app:destination="@id/loginActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_clienteFormCadastroPerfilPFFragment"
+            app:destination="@id/cliente_form_cad_perfilpf_fragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_home_fragment_to_enderecoCadastradosFragment"
+            app:destination="@id/enderecoCadastradosFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/cliente_form_cad_perfilpf_fragment"
+        android:name="br.com.mantunes.sped.ui.fragment.ClienteFormCadastroPerfilPFFragment"
+        android:label="@string/txv_perfil"
+        tools:layout="@layout/cliente_form_cadastro_perfil_pf" >
+        <action
+            android:id="@+id/action_cliente_form_cad_perfilpf_fragment_to_enderecoCadastradosFragment"
+            app:destination="@id/enderecoCadastradosFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_cliente_form_cad_perfilpf_fragment_to_home_fragment"
+            app:destination="@id/home_fragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/home_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="br.com.mantunes.sped.ui.activity.MainActivity"
+        android:label="Comprar" />
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="br.com.mantunes.sped.ui.activity.LoginActivity" />
+    <fragment
+        android:id="@+id/enderecoCadastradosFragment"
+        android:name="br.com.mantunes.sped.ui.fragment.EnderecoCadastradosFragment"
+        android:label="Endereços"
+        tools:layout="@layout/enderecos_cadastrados">
+        <action
+            android:id="@+id/action_enderecoCadastradosFragment_to_enderecoFormCadastroFragment"
+            app:destination="@id/enderecoFormCadastroFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_enderecoCadastradosFragment_to_enderecoVisualizaDetalheFragment"
+            app:destination="@id/enderecoVisualizaDetalheFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_enderecoCadastradosFragment_to_home_fragment"
+            app:destination="@id/home_fragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/home_fragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/enderecoFormCadastroFragment"
+        android:name="br.com.mantunes.sped.ui.fragment.EnderecoFormCadastroFragment"
+        android:label="Atualizar enderecos"
+        tools:layout="@layout/endereco_form_cadastro">
+        <action
+            android:id="@+id/action_enderecoFormCadastroFragment_to_enderecoCadastradosFragment"
+            app:destination="@id/enderecoCadastradosFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/enderecoCadastradosFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="endereco"
+            app:argType="br.com.mantunes.sped.model.Endereco" />
+    </fragment>
+    <fragment
+        android:id="@+id/enderecoVisualizaDetalheFragment"
+        android:name="br.com.mantunes.sped.ui.fragment.EnderecoVisualizaDetalheFragment"
+        android:label="Visualização do endereço"
+        tools:layout="@layout/endereco_visualizacao">
+        <action
+            android:id="@+id/action_enderecoVisualizaDetalheFragment_to_enderecoFormCadastroFragment"
+            app:destination="@id/enderecoFormCadastroFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_enderecoVisualizaDetalheFragment_to_enderecoCadastradosFragment"
+            app:destination="@id/enderecoCadastradosFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <argument
+            android:name="endereco"
+            app:argType="br.com.mantunes.sped.model.Endereco" />
+    </fragment>
+</navigation>

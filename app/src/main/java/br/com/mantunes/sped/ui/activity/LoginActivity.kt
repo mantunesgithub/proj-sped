@@ -9,6 +9,7 @@ import br.com.mantunes.sped.extensions.toast
 import br.com.mantunes.sped.extensions.vaiPara
 import br.com.mantunes.sped.ui.fragment.*
 import br.com.mantunes.sped.ui.viewmodel.ClienteViewModel
+import br.com.mantunes.sped.ui.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.login.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -18,6 +19,7 @@ import org.koin.core.parameter.parametersOf
 class LoginActivity : AppCompatActivity() {
     private val clienteId: Long = 0
     private val viewModel: ClienteViewModel by viewModel { parametersOf(clienteId) }
+    private val viewModelLogin: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,14 +39,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun autentica(email: String, senha: String) {
+
         viewModel.autentica(email, senha).observe(
             this, Observer {
                 it?.let { clienteEncontrado ->
-                    val prefs =
-                        getSharedPreferences(FILE_PREFERENCE, MODE_PRIVATE) // Declare xml file
-                    prefs.edit().putLong(CHAVE_LOGIN_CLIENTE, clienteEncontrado.id).apply()
-
-                    vaiPara(MainActivity::class.java) { finish() }
+//                    val prefs =
+//                       getSharedPreferences(FILE_PREFERENCE, MODE_PRIVATE) // Declare xml file
+//                    prefs.edit().putLong(CHAVE_LOGIN_CLIENTE, clienteEncontrado.id).apply()
+                    viewModelLogin.salvaIdDoCliente(clienteEncontrado)
+                    vaiPara(MainActivityNavigationDrawer::class.java) { finish() }
 
                 } ?: toast("Cliente não encontrado - Cadastrar o Cliente")
             })
@@ -54,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
         login_botao_cadastrar.setOnClickListener {
             it?.let {
                 val clienteFormCadastroFragment: ClienteFormCadastroFragment by inject()
-                setContentView(R.layout.main_activity)
+                setContentView(R.layout.activity_main)
                 transacaoFragment {
                     replace(R.id.container, clienteFormCadastroFragment)
                 }

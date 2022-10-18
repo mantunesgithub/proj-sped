@@ -26,6 +26,7 @@
         android:clickable="true"
         android:focusable="true"
         android:backgroundTint="@color/colorPrimary"
+        app:tint="#FFFFFF"
         app:layout_constraintTop_toTopOf="@id/lista_produtos_recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintVertical_bias="0.0"

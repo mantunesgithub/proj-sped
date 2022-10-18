@@ -1,7 +1,6 @@
 package br.com.mantunes.sped.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.LinearLayout.VERTICAL
 import androidx.lifecycle.Observer
@@ -9,7 +8,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.extensions.formatParaMoedaBrasileira
 import br.com.mantunes.sped.model.Carrinho
-import br.com.mantunes.sped.ui.fragment.extensions.mostraErro
+import br.com.mantunes.sped.ui.fragment.extensions.mostraMsg
 import br.com.mantunes.sped.ui.recyclerview.adapter.CarrinhoAdapter
 import br.com.mantunes.sped.ui.viewmodel.CarrinhoViewModel
 import kotlinx.android.synthetic.main.lista_carrinho.*
@@ -17,13 +16,16 @@ import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.math.BigDecimal
+import java.nio.file.Files.find
+
 class ListaCarrinhoFragment : ClienteBaseLogadoFragment() {
 
     private var totalCarrinho: BigDecimal = BigDecimal.ZERO
     var quandoClienteSaiDoApp: ()-> Unit = {}
     private val viewModel: CarrinhoViewModel by viewModel { parametersOf(clienteIdLogado) }
     private val adapter: CarrinhoAdapter by inject()
-
+    lateinit var homeMenu: MenuItem
+    var quandoClienteVaiParaHome: ()-> Unit = {}
     var quandoProdutoSelecionado: (carrinho: Carrinho) -> Unit = {}
     var quandoAdicionaCarrinho: (carrinho: Carrinho) -> Unit = {}
     var quandoRemoveCarrinho: (carrinho: Carrinho) -> Unit = {}
@@ -38,13 +40,16 @@ class ListaCarrinhoFragment : ClienteBaseLogadoFragment() {
         buscaCarrinho()
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_lista_categoria,menu)
+        inflater.inflate(R.menu.menu_app_bar,menu)
+//        menu.findItem(R.id.menu_app_home).setVisible(false)
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         when (item.itemId) {
-            R.id.menu_lista_categoria -> { quandoClienteSaiDoApp() }
+            R.id.menu_app_sair -> { quandoClienteSaiDoApp() }
+            R.id.menu_app_home -> { quandoClienteVaiParaHome() }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -65,7 +70,7 @@ class ListaCarrinhoFragment : ClienteBaseLogadoFragment() {
                             if (listaCarrinhoCliente.isNotEmpty()) {
                                 quandoFinalizaPedido(clienteIdLogado)
                             } else {
-                                mostraErro("Carrinho está vazio")
+                                mostraMsg("Carrinho está vazio")
                             }
                         }
                     }

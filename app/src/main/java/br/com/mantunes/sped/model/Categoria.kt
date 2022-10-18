@@ -2,6 +2,7 @@ package br.com.mantunes.sped.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.*
 
 @Entity
 class Categoria(

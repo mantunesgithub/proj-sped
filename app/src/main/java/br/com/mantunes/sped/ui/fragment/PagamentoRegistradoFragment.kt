@@ -1,15 +1,10 @@
 package br.com.mantunes.sped.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.lifecycle.Observer
-import br.com.mantunes.sped.MainActivity
 import br.com.mantunes.sped.R
-import br.com.mantunes.sped.model.PedidoDTO
-import br.com.mantunes.sped.ui.fragment.extensions.mostraErro
 import br.com.mantunes.sped.ui.viewmodel.CarrinhoViewModel
-import kotlinx.android.synthetic.main.pagamento_com_pix.*
 import kotlinx.android.synthetic.main.pagamento_pedido_registrado.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -38,13 +33,13 @@ class PagamentoRegistradoFragment : ClienteBaseLogadoFragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_lista_categoria, menu)
+        inflater.inflate(R.menu.menu_app_bar, menu)
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_lista_categoria -> {
+            R.id.menu_app_sair -> {
                 quandoClienteSaiDoApp()
             }
         }

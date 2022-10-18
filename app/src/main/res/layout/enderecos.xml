@@ -17,8 +17,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="34dp"
-            android:text="Selecione um endereco"
+            android:layout_marginBottom="16dp"
+            android:text="Selecione um endereco:"
             android:textSize="24sp"
             android:textStyle="normal" />
 

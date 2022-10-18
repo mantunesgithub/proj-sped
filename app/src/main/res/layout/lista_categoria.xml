@@ -22,15 +22,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:tint="#FFFFFF"
         android:backgroundTint="@color/colorPrimary"
         android:checkable="true"
-        android:visible="true"
-        android:enabled="true"
         android:clickable="true"
-        android:focusable="true"
-        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:focusable="auto"
+        android:visible="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/lista_categoria_recyclerview"
+        app:showAsAction="ifRoom"
         app:srcCompat="@drawable/ic_action_cart" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

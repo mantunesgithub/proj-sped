@@ -1,9 +1,13 @@
 package br.com.mantunes.sped.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 @Entity(
     foreignKeys = [ForeignKey(
         entity = Endereco::class,
@@ -24,5 +28,6 @@ data class Endereco (
     val cidade: String,
     val estado: String,
     val pais: String,
+    val tipo: String,
     val clienteId : Long
-)
+): Parcelable

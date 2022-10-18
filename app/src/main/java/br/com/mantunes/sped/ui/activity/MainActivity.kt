@@ -3,8 +3,11 @@ package br.com.mantunes.sped.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings.Global.putLong
+import android.system.Os.remove
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import br.com.mantunes.sped.R
@@ -14,18 +17,24 @@ import br.com.mantunes.sped.model.CarrinhoOper
 import br.com.mantunes.sped.model.Categoria
 import br.com.mantunes.sped.model.Produto
 import br.com.mantunes.sped.ui.fragment.*
+import br.com.mantunes.sped.ui.viewmodel.LoginViewModel
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
+import retrofit2.Retrofit
 
 class MainActivity : AppCompatActivity() {
     var clienteIdLogin: Long = 0L
+    private val viewModelLogin: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
-        clienteIdLogin = buscaLoginDoCliente()
+        setContentView(R.layout.activity_main)
+//        clienteIdLogin = buscaLoginDoCliente()
+        clienteIdLogin = viewModelLogin.buscaLoginDoCliente()
         if (clienteIdLogin < 0) {
             vaiParaLogin()
         }
+
         tentaCarregarDestino()?.let {
 //            intent.removeExtra(CHAVE_DESTINO)
             if (it == "categoria") { vaiParaListaCategoria(clienteIdLogin) }
@@ -46,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onAttachFragment(fragment: Fragment) {
         super.onAttachFragment(fragment)
-        clienteIdLogin = buscaLoginDoCliente()
+        clienteIdLogin = viewModelLogin.buscaLoginDoCliente()
 
         when (fragment) {
 
@@ -99,6 +108,9 @@ class MainActivity : AppCompatActivity() {
             quandoFinalizaPedido = {clienteIdLogin ->
                 vaiPara(MainFinalizaPedidoActivity::class.java)
             }
+            quandoClienteVaiParaHome = {
+                vaiPara(MainActivityNavigationDrawer::class.java) { finish() }
+            }
             quandoClienteSaiDoApp = ::vaiParaLogin
         }
     }
@@ -117,6 +129,9 @@ class MainActivity : AppCompatActivity() {
             quandoProdutoAdiciona = ::irParaAdicionaNoCarrinhoFragment
             quandoDetalheProdutoFab = {
                 vaiParaListaCarrinho(clienteIdLogin)
+            }
+            quandoClienteVaiParaHome = {
+                vaiPara(MainActivityNavigationDrawer::class.java) { finish() }
             }
             quandoClienteSaiDoApp = ::vaiParaLogin
         }
@@ -139,6 +154,9 @@ class MainActivity : AppCompatActivity() {
             quandoProdutoFab = {
                 vaiParaListaCarrinho(clienteIdLogin)
             }
+            quandoClienteVaiParaHome = {
+                vaiPara(MainActivityNavigationDrawer::class.java) { finish() }
+            }
             quandoClienteSaiDoApp = ::vaiParaLogin
         }
     }
@@ -150,6 +168,9 @@ class MainActivity : AppCompatActivity() {
             }
             quandoCategoriaFab = {
                 vaiParaListaCarrinho(clienteIdLogin)
+            }
+            quandoClienteVaiParaHome = {
+                vaiPara(MainActivityNavigationDrawer::class.java) { finish() }
             }
             quandoClienteNaoLogado = ::vaiParaLogin
             quandoClienteSaiDoApp = ::vaiParaLogin
@@ -217,19 +238,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun vaiParaLogin() {
-        val prefs = getSharedPreferences(FILE_PREFERENCE, Context.MODE_PRIVATE)
-        prefs.edit().remove(CHAVE_LOGIN_CLIENTE).commit();
+//        val prefs = getSharedPreferences(FILE_PREFERENCE, Context.MODE_PRIVATE)
+//        prefs.edit().remove(CHAVE_LOGIN_CLIENTE).commit();
+        viewModelLogin.removeIdDoCliente()
+        Log.i("TAG", "vaiParaLogin: Logim removido ")
         vaiPara(LoginActivity::class.java) {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             finish()
         }
     }
 
-    fun buscaLoginDoCliente(): Long {
-        val sp = getSharedPreferences(FILE_PREFERENCE, MODE_PRIVATE)
-        val clienteIdLogin: Long = sp.getLong(CHAVE_LOGIN_CLIENTE, -1)
-        return clienteIdLogin
-    }
+//    fun buscaLoginDoCliente(): Long {
+//        val sp = getSharedPreferences(FILE_PREFERENCE, MODE_PRIVATE)
+//        val clienteIdLogin: Long = sp.getLong(CHAVE_LOGIN_CLIENTE, -1)
+//        return preferences.getLong(CHAVE_LOGIN_CLIENTE,-1)
+//        return clienteIdLogin
+//    }
 
     private fun tentaCarregarDestino(): String? {
         val destino = intent.getStringExtra(CHAVE_DESTINO)

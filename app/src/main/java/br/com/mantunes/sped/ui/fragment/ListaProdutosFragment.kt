@@ -7,12 +7,16 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.model.Produto
+import br.com.mantunes.sped.ui.fragment.extensions.mostraMsg
 import br.com.mantunes.sped.ui.recyclerview.adapter.ProdutosAdapter
 import br.com.mantunes.sped.ui.viewmodel.ProdutosViewModel
 import kotlinx.android.synthetic.main.lista_produtos.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+private const val MENSAGEM_FALHA_CARREGAR_PRODUTOS =
+        "Não foi possível carregar novos produtos"
+
 class ListaProdutosFragment : ClienteBaseLogadoFragment() {
     private val viewModel: ProdutosViewModel by viewModel{ parametersOf(categoriaIdSelecionada) }
     private val adapter: ProdutosAdapter by inject()
@@ -20,6 +24,7 @@ class ListaProdutosFragment : ClienteBaseLogadoFragment() {
     var quandoProdutoSelecionado: (produto: Produto) -> Unit = {}
     var quandoProdutoFab: (View)-> Unit = {}
     var quandoClienteSaiDoApp: ()-> Unit = {}
+    var quandoClienteVaiParaHome: ()-> Unit = {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,25 +33,34 @@ class ListaProdutosFragment : ClienteBaseLogadoFragment() {
         buscaProdutos()
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_lista_categoria,menu)
+        inflater.inflate(R.menu.menu_app_bar,menu)
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_lista_categoria -> { quandoClienteSaiDoApp() }
+            R.id.menu_app_sair -> { quandoClienteSaiDoApp() }
+            R.id.menu_app_home -> { quandoClienteVaiParaHome() }
         }
         return super.onOptionsItemSelected(item)
     }
 
     private fun buscaProdutos() {
-        viewModel.buscaTodos(categoriaIdSelecionada).observe(
-            this, Observer { produtosEncontrados ->
-            produtosEncontrados?.let {
-                adapter.atualiza(it)
+        viewModel.buscaTodos(categoriaIdSelecionada).
+            observe(this, Observer { resource->
+            resource.dado?.let { adapter.atualiza(it) }
+            resource.erro?.let {
+                mostraMsg(MENSAGEM_FALHA_CARREGAR_PRODUTOS)
             }
         })
     }
+//            viewModel.buscaTodos(categoriaIdSelecionada).observe(
+//            this, Observer { produtosEncontrados ->
+//            produtosEncontrados?.let {
+//                adapter.atualiza(it)
+//            }
+//        })
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

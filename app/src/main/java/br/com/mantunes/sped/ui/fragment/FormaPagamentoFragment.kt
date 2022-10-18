@@ -1,19 +1,15 @@
 package br.com.mantunes.sped.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.Toast
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.model.PedidoDTO
 import br.com.mantunes.sped.model.enum.TIPO_PAGAMENTO
-import br.com.mantunes.sped.ui.fragment.extensions.mostraErro
+import br.com.mantunes.sped.ui.fragment.extensions.mostraMsg
 import kotlinx.android.synthetic.main.forma_pagamento.*
-import kotlinx.android.synthetic.main.pagamento_com_pix.*
 
 class FormaPagamentoFragment : ClienteBaseLogadoFragment() {
     var quandoSelecionaPagamento: (pedidoDTO: PedidoDTO?) -> Unit = {}
@@ -57,7 +53,7 @@ class FormaPagamentoFragment : ClienteBaseLogadoFragment() {
                         quandoSelecionaPagamento(pedidoDTO)
                     }
                 } else {
-                    mostraErro("Escolher uma forma de pagamento")
+                    mostraMsg("Escolher uma forma de pagamento")
                 }
             }
         }

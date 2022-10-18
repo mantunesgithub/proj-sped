@@ -23,5 +23,5 @@ data class Produto(
     val descricao: String,
     val preco: BigDecimal,
     val imagem: String? = null,
-    val categoriaId : Long
+    var categoriaId : Long
 ): Parcelable

@@ -40,7 +40,8 @@ class EnderecoFragment : ClienteBaseLogadoFragment() {
     }
 
     private fun formataPedidoDTOcliente() {
-        viewModelCliente.buscaPorId(clienteIdLogado).observe(this, Observer {clienteObserver->
+        viewModelCliente.buscaPorId(clienteIdLogado).
+            observe(viewLifecycleOwner, Observer {clienteObserver->
             clienteObserver?.let { cliente ->
                 pedidoDTO?.clienteLogado =  cliente
                 buscaEnderecos()
@@ -60,12 +61,14 @@ class EnderecoFragment : ClienteBaseLogadoFragment() {
             it?.let { formataPedidoDTOenderecoEscolhido(enderecosDisponiveis[2]) }
         }
     }
+
     private fun formataPedidoDTOenderecoEscolhido(enderecoEscolhido: Endereco) {
         pedidoDTO?.enderecoEscolhido = enderecoEscolhido
         quandoEnderecoSelecionado(pedidoDTO)
     }
+
     private fun buscaEnderecos() {
-        viewModel.buscaTodos(clienteIdLogado).observe(this, Observer { listaEnderecoEncontrada ->
+        viewModel.buscaTodos(clienteIdLogado).observe(viewLifecycleOwner, Observer { listaEnderecoEncontrada ->
             listaEnderecoEncontrada?.let { listaEndereco ->
                 enderecosDisponiveis = listaEndereco
                 endereco1_cardview.visibility = View.GONE

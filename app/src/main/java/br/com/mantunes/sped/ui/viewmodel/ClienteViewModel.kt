@@ -16,7 +16,11 @@ class ClienteViewModel(
     fun buscaPorId(clienteId: Long): LiveData<Cliente> {
         return clienteRepository.buscaPorId(clienteId)
     }
-    fun autentica(email: String, senha:String): LiveData<Cliente> {
+
+    fun autentica(email: String, senha: String): LiveData<Cliente> {
         return clienteRepository.autentica(email, senha)
     }
+
+    fun atualiza(cliente: Cliente) =
+        clienteRepository.atualiza(cliente)
 }

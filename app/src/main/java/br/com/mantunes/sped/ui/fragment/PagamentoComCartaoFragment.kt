@@ -7,7 +7,7 @@ import android.widget.*
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.model.PedidoDTO
 import br.com.mantunes.sped.model.enum.TIPO_PAGAMENTO
-import br.com.mantunes.sped.ui.fragment.extensions.mostraErro
+import br.com.mantunes.sped.ui.fragment.extensions.mostraMsg
 import kotlinx.android.synthetic.main.pagamento_com_cartao.*
 
 class PagamentoComCartaoFragment : ClienteBaseLogadoFragment() {
@@ -57,17 +57,17 @@ class PagamentoComCartaoFragment : ClienteBaseLogadoFragment() {
 
         if (pagamento_cartao_numero_cartao.text.toString() == null ||
             pagamento_cartao_numero_cartao.text.toString() == "") {
-            mostraErro("Preencher numero do cartao")
+            mostraMsg("Preencher numero do cartao")
             dadosDoCartaoEstaValido = "erro"
         }
         if (pagamento_cartao_data_validade.text.toString() == null ||
             pagamento_cartao_data_validade.text.toString() == "") {
-            mostraErro("Preencher data validade do cartao")
+            mostraMsg("Preencher data validade do cartao")
             dadosDoCartaoEstaValido = "erro"
         }
         if (pagamento_cartao_cvc.text.toString() == null ||
             pagamento_cartao_cvc.text.toString() == "") {
-            mostraErro("Preencher cvc do cartao")
+            mostraMsg("Preencher cvc do cartao")
             dadosDoCartaoEstaValido = "erro"
         }
         return dadosDoCartaoEstaValido

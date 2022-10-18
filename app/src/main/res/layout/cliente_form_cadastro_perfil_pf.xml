@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/cliente_form_cadastro_perfil_pf_btn_enderecos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@android:color/transparent"
+            android:text="Visualizar endereços"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txi_cliente_form_cadastro_perfil_pf_genero"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/txi_cliente_form_cadastro_perfil_pf_genero"
+            app:layout_constraintTop_toBottomOf="@id/txi_cliente_form_cadastro_perfil_pf_genero"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/cliente_form_cadastro_perfil_pf_btn_alterar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Alterar dados do perfil"
+            android:textColor="@color/design_default_color_background"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cliente_form_cadastro_perfil_pf_btn_enderecos"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/cliente_form_cadastro_perfil_pf_btn_enderecos"
+            app:layout_constraintTop_toBottomOf="@id/cliente_form_cadastro_perfil_pf_btn_enderecos"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/cliente_form_cadastro_perfil_pf_imagem"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/colorAccent"
+            android:scaleType="centerCrop"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:srcCompat="@drawable/ic_action_perfil" />
+
+        <TextView
+            android:id="@+id/cliente_form_cadastro_perfil_pf_botao_camera"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/ic_fundo_camera"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.91"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cliente_form_cadastro_perfil_pf_imagem" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txi_cliente_form_cadastro_perfil_pf_nome"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cliente_form_cadastro_perfil_pf_imagem">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cliente_form_cadastro_perfil_pf_nome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nome"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txi_cliente_form_cadastro_perfil_pf_cpf"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@id/txi_cliente_form_cadastro_perfil_pf_nome"
+            app:layout_constraintStart_toStartOf="@id/txi_cliente_form_cadastro_perfil_pf_nome"
+            app:layout_constraintTop_toBottomOf="@id/txi_cliente_form_cadastro_perfil_pf_nome">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cliente_form_cadastro_perfil_pf_cpf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cpf"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txi_cliente_form_cadastro_perfil_pf_email"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/txi_cliente_form_cadastro_perfil_pf_cpf"
+            app:layout_constraintStart_toStartOf="@+id/txi_cliente_form_cadastro_perfil_pf_cpf"
+            app:layout_constraintTop_toBottomOf="@+id/txi_cliente_form_cadastro_perfil_pf_cpf">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cliente_form_cadastro_perfil_pf_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txi_cliente_form_cadastro_perfil_pf_senha"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/txi_cliente_form_cadastro_perfil_pf_email"
+            app:layout_constraintStart_toStartOf="@+id/txi_cliente_form_cadastro_perfil_pf_email"
+            app:layout_constraintTop_toBottomOf="@+id/txi_cliente_form_cadastro_perfil_pf_email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cliente_form_cadastro_perfil_pf_senha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Senha"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txi_cliente_form_cadastro_perfil_pf_senha_nova"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/txi_cliente_form_cadastro_perfil_pf_senha"
+            app:layout_constraintStart_toStartOf="@+id/txi_cliente_form_cadastro_perfil_pf_senha"
+            app:layout_constraintTop_toBottomOf="@+id/txi_cliente_form_cadastro_perfil_pf_senha">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cliente_form_cadastro_perfil_pf_senha_nova"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Senha Nova"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txi_cliente_form_cadastro_perfil_pf_fone_res"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/txi_cliente_form_cadastro_perfil_pf_senha_nova"
+            app:layout_constraintStart_toStartOf="@+id/txi_cliente_form_cadastro_perfil_pf_senha_nova"
+            app:layout_constraintTop_toBottomOf="@+id/txi_cliente_form_cadastro_perfil_pf_senha_nova">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cliente_form_cadastro_perfil_pf_fone_res"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Telefone residencial"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txi_cliente_form_cadastro_perfil_pf_fone_com"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/txi_cliente_form_cadastro_perfil_pf_fone_res"
+            app:layout_constraintStart_toStartOf="@+id/txi_cliente_form_cadastro_perfil_pf_fone_res"
+            app:layout_constraintTop_toBottomOf="@+id/txi_cliente_form_cadastro_perfil_pf_fone_res">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cliente_form_cadastro_perfil_pf_fone_com"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Telefone celular"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txi_cliente_form_cadastro_perfil_pf_fone_outro"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/txi_cliente_form_cadastro_perfil_pf_fone_com"
+            app:layout_constraintStart_toStartOf="@+id/txi_cliente_form_cadastro_perfil_pf_fone_com"
+            app:layout_constraintTop_toBottomOf="@+id/txi_cliente_form_cadastro_perfil_pf_fone_com">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cliente_form_cadastro_perfil_pf_fone_outr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Telefone outros"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txi_cliente_form_cadastro_perfil_pf_dtNascimento"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/txi_cliente_form_cadastro_perfil_pf_fone_outro"
+            app:layout_constraintStart_toStartOf="@+id/txi_cliente_form_cadastro_perfil_pf_fone_outro"
+            app:layout_constraintTop_toBottomOf="@+id/txi_cliente_form_cadastro_perfil_pf_fone_outro">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cliente_form_cadastro_perfil_pf_dtNascimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Data nascimento"
+                android:inputType="date" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txi_cliente_form_cadastro_perfil_pf_naturalidade"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/txi_cliente_form_cadastro_perfil_pf_dtNascimento"
+            app:layout_constraintStart_toStartOf="@+id/txi_cliente_form_cadastro_perfil_pf_dtNascimento"
+            app:layout_constraintTop_toBottomOf="@+id/txi_cliente_form_cadastro_perfil_pf_dtNascimento">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cliente_form_cadastro_perfil_pf_naturalidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Naturalidade"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txi_cliente_form_cadastro_perfil_pf_genero"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/txi_cliente_form_cadastro_perfil_pf_naturalidade"
+            app:layout_constraintStart_toStartOf="@+id/txi_cliente_form_cadastro_perfil_pf_naturalidade"
+            app:layout_constraintTop_toBottomOf="@+id/txi_cliente_form_cadastro_perfil_pf_naturalidade">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cliente_form_cadastro_perfil_pf_genero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Genero M/F"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

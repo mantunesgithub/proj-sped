@@ -12,7 +12,7 @@ import br.com.mantunes.sped.extensions.vaiPara
 import br.com.mantunes.sped.model.Cliente
 import br.com.mantunes.sped.ui.activity.LoginActivity
 import br.com.mantunes.sped.ui.viewmodel.ClienteViewModel
-import kotlinx.android.synthetic.main.formulario_cadastro_cliente.*
+import kotlinx.android.synthetic.main.form_cadastro_cliente.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -37,7 +37,7 @@ class ClienteFormCadastroFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(
-            R.layout.formulario_cadastro_cliente,
+            R.layout.form_cadastro_cliente,
             container,
             false
         )
@@ -62,11 +62,12 @@ class ClienteFormCadastroFragment : Fragment() {
         val cpfCnpj = formulario_cadastro_cpfCnpj.text.toString()
         val tipoPessoa = formulario_cadastro_tipoPessoa.text.toString()
         val email = formulario_cadastro_email.text.toString()
-        salva(Cliente(clienteId, nome, tipoPessoa, cpfCnpj, email, senha))
+        salva(Cliente(clienteId, nome, tipoPessoa, cpfCnpj, email, senha,"","",
+        "","","","","","","",null))
     }
 
     private fun salva(cliente: Cliente) {
-        viewModel.salva(cliente).observe(this, Observer {
+        viewModel.salva(cliente).observe(viewLifecycleOwner, Observer {
             it?.dado?.let {
                 it
             }

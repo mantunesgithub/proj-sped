@@ -27,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.45"
-            tools:text="@tools:sample/lorem/random" />
+            tools:text="Rua/Av , numero" />
 
         <TextView
             android:id="@+id/item_endereco_compl_bairro_cep"
@@ -40,7 +40,7 @@
             app:layout_constraintEnd_toEndOf="@id/item_endereco_logradouro"
             app:layout_constraintStart_toStartOf="@id/item_endereco_logradouro"
             app:layout_constraintTop_toBottomOf="@id/item_endereco_logradouro"
-            tools:text="@tools:sample/lorem/random" />
+            tools:text="Complemento - Bairro - Cep" />
 
         <TextView
             android:id="@+id/item_endereco_cidade_estado"
@@ -55,6 +55,6 @@
             app:layout_constraintEnd_toEndOf="@id/item_endereco_compl_bairro_cep"
             app:layout_constraintStart_toStartOf="@id/item_endereco_compl_bairro_cep"
             app:layout_constraintTop_toBottomOf="@id/item_endereco_compl_bairro_cep"
-            tools:text="@tools:sample/lorem/random" />
+            tools:text="Cidade - Estado País" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

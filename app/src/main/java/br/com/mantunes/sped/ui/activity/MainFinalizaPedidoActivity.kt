@@ -10,17 +10,19 @@ import androidx.fragment.app.Fragment
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.extensions.vaiPara
 import br.com.mantunes.sped.model.*
-import br.com.mantunes.sped.model.enum.ESTADO_PAGAMENTO
 import br.com.mantunes.sped.model.enum.TIPO_PAGAMENTO
 import br.com.mantunes.sped.ui.fragment.*
+import br.com.mantunes.sped.ui.viewmodel.LoginViewModel
 import org.koin.android.ext.android.inject
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainFinalizaPedidoActivity : AppCompatActivity() {
     var clienteIdLogin: Long = 0L
+    private val viewModelLogin: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
+        setContentView(R.layout.activity_main)
         clienteIdLogin = buscaLoginDoCliente()
         if (clienteIdLogin < 0) {
             vaiParaLogin()
@@ -243,16 +245,19 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
     }
 
     private fun buscaLoginDoCliente(): Long {
-        val sp = getSharedPreferences(FILE_PREFERENCE, MODE_PRIVATE)
-        val clienteIdLogin: Long = sp.getLong(CHAVE_LOGIN_CLIENTE, -1)
+//        val sp = getSharedPreferences(FILE_PREFERENCE, MODE_PRIVATE)
+//        val clienteIdLogin: Long = sp.getLong(CHAVE_LOGIN_CLIENTE, -1)
+        val clienteIdLogin: Long = viewModelLogin.buscaLoginDoCliente()
         return clienteIdLogin
     }
 
     fun inicializaPedidoDTO(): PedidoDTO {
-        val clienteLogado = Cliente(0L, "null", "", "", "", "")
+        val clienteLogado = Cliente(0L, "null", "", "", "", "",""
+        ,"","","","","","","","",
+        "")
         val endereco = Endereco(
             0L, "null", "", "", "", "", "",
-            "", "", 0L
+            "", "", "",0L,
         )
         val listaCarrinho: MutableList<Carrinho> = mutableListOf()
         return PedidoDTO(

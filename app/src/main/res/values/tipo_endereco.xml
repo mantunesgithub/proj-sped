@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="values_array_tipo_endereco">
+        <item>Residencial</item> <item>Comercial</item><item>Outros</item>
+    </string-array>
+</resources>

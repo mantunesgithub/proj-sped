@@ -1,3 +1,6 @@
 package br.com.mantunes.sped.repository
 
-class Resource<T>(val dado: T)
+class Resource<T>(
+    val dado: T?,
+    val erro: String? = null
+)

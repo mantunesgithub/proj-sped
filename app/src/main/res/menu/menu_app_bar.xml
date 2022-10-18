@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-
+     <item
+        android:id="@+id/menu_app_home"
+        android:checkable="true"
+        android:enabled="true"
+        android:icon="@drawable/ic_action_home"
+        android:title="Ir para Home"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/menu_lista_categoria"
+        android:id="@+id/menu_app_sair"
         android:checkable="true"
         android:enabled="true"
         android:icon="@drawable/ic_action_sair_app"
         android:title="Sair do App"
         android:visible="true"
         app:showAsAction="ifRoom" />
+
 </menu>

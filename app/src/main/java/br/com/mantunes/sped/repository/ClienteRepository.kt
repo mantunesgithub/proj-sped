@@ -28,4 +28,13 @@ class ClienteRepository (private val daoCliente: ClienteDAO) {
     fun  autentica (email: String, senha: String) : LiveData<Cliente> {
         return daoCliente.autentica(email, senha)
     }
+    fun atualiza(cliente: Cliente): LiveData<Resource<Long>> {
+        return MutableLiveData<Resource<Long>>().also { liveDate ->
+            scope.launch {
+                daoCliente.atualiza(cliente)
+                liveDate.postValue(Resource(cliente.id))
+            }
+        }
+    }
+
 }

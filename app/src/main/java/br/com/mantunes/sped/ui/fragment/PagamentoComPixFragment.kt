@@ -1,13 +1,12 @@
 package br.com.mantunes.sped.ui.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.model.PedidoDTO
-import br.com.mantunes.sped.ui.fragment.extensions.mostraErro
+import br.com.mantunes.sped.ui.fragment.extensions.mostraMsg
 import kotlinx.android.synthetic.main.pagamento_com_pix.*
 
 class PagamentoComPixFragment : ClienteBaseLogadoFragment() {
@@ -39,7 +38,7 @@ class PagamentoComPixFragment : ClienteBaseLogadoFragment() {
                 if (preencheuPagamento == 1) {
                     quandoPagamentoComPix(pedidoDTO)
                 } else {
-                    mostraErro("Preencher pagamento pix escolhendo somente uma opção")
+                    mostraMsg("Preencher pagamento pix escolhendo somente uma opção")
                 }
             }
         }

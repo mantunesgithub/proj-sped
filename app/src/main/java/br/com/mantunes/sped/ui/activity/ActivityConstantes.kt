@@ -1,6 +1,7 @@
 package br.com.mantunes.sped.ui.activity
 
 const val CHAVE_DESTINO : String= "CHAVE_MAIN"
+const val CHAVE_ENDERECO : String= "CHAVE_ENDERECO"
 const val CHAVE_LOGIN_CLIENTE : String= "CHAVE_LOGIN_CLIENTE"
 const val CHAVE_PRODUTO_ARGS : String= "CHAVE_PRODUTO_ARGS"
 const val CHAVE_PRODUTO_ID_ARGS : String= "CHAVE_PRODUTO_ID_ARGS"

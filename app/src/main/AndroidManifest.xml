@@ -1,29 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.mantunes.sped">
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".AppApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Sped"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="br.com.mantunes.sped.AppApplication">
-
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.MainFinalizaPedidoActivity" />
+        <activity android:name=".ui.activity.MainActivity" />
         <activity
-            android:name="br.com.mantunes.sped.MainActivity"
-            android:exported="true" />
-        <activity android:name="br.com.mantunes.sped.ui.activity.LoginActivity"/>
-        <activity android:name="br.com.mantunes.sped.ui.activity.MainFinalizaPedidoActivity"/>
-        <activity android:name="br.com.mantunes.sped.ui.activity.MainActivity"
+            android:name=".ui.activity.MainActivityNavigationDrawer"
+            android:theme="@style/AppTheme.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
+        <!-- FileProvider -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="br.com.mantunes.sped"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

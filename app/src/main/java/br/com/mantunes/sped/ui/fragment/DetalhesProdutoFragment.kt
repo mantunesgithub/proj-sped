@@ -20,6 +20,7 @@ class DetalhesProdutoFragment : ClienteBaseLogadoFragment() {
     var quandoProdutoAdiciona: (produto: Produto) -> Unit = {}
     var quandoDetalheProdutoFab: (View) -> Unit = {}
     var quandoClienteSaiDoApp: ()-> Unit = {}
+    var quandoClienteVaiParaHome: ()-> Unit = {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,13 +43,14 @@ class DetalhesProdutoFragment : ClienteBaseLogadoFragment() {
         activity?.title = TITULO_APPBAR_DETALHES_DO_PRODUTO
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_lista_categoria,menu)
+        inflater.inflate(R.menu.menu_app_bar,menu)
         return super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.menu_lista_categoria -> { quandoClienteSaiDoApp() }
+            R.id.menu_app_sair -> { quandoClienteSaiDoApp() }
+            R.id.menu_app_home -> { quandoClienteVaiParaHome() }
         }
         return super.onOptionsItemSelected(item)
     }

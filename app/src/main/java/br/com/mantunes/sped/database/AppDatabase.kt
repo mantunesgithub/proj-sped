@@ -9,7 +9,6 @@ import br.com.mantunes.sped.model.*
 
 @Database(
     version = 1,
-
     entities = [Produto::class, Pagamento::class, Categoria::class,
                Carrinho::class, Cliente::class, Endereco::class,
                Pedido::class, ItensDoPedido::class],
