@@ -61,7 +61,7 @@ class DetalhesProdutoFragment : ClienteBaseLogadoFragment() {
         }
     }
     private fun buscaProduto() {
-        viewModel.produtoEncontrado.observe(this, Observer {
+        viewModel.produtoEncontrado.observe(viewLifecycleOwner, Observer {
             it?.let { produto ->
                 detalhes_produto_nome.text = produto.nome
                 detalhes_produto_descricao.text = produto.descricao

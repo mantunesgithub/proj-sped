@@ -85,9 +85,10 @@ class ListaCategoriasFragment : ClienteBaseLogadoFragment() {
 
     private fun buscaCategoria() {
         viewModel.buscaTodos().observe(this, Observer { resource->
-            resource.dado?.let { adapter.atualiza(it) }
+            resource.dado?.let {
+                        adapter.atualiza(it) }
             resource.erro?.let {
-                mostraMsg(MENSAGEM_FALHA_CARREGAR_CATEGORIAS)
+                        mostraMsg(MENSAGEM_FALHA_CARREGAR_CATEGORIAS)
             }
         })
     }

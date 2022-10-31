@@ -18,6 +18,7 @@ import br.com.mantunes.sped.ui.recyclerview.adapter.ItensDoPedidoAdapter
 import br.com.mantunes.sped.ui.recyclerview.adapter.ProdutosAdapter
 import br.com.mantunes.sped.ui.viewmodel.*
 import br.com.mantunes.sped.webclient.CategoriaWebClient
+import br.com.mantunes.sped.webclient.EnderecoWebViacep
 import br.com.mantunes.sped.webclient.ProdutoWebClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -55,6 +56,13 @@ val testeDatabaseModule = module {
                                 descricao = "Material de informatica",
                                 imagem = "https://images.pexels.com/photos/8720619/pexels-photo-8720619.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                             ))
+
+ //                       daoCategoria.salva(listaCategorias)
+//
+//                        }else {
+//                            Log.e("AppModule", "ATENÇÃO: Erro na Inicialização" )
+//                        }
+
                     }
                 }
             }).build()
@@ -82,6 +90,7 @@ val daoModule = module {
     single<ItensDoPedidoDAO> { get<AppDatabase>().itensDoPedido() }
     single<SharedPreferences> { PreferenceManager.getDefaultSharedPreferences(get()) }
 
+    single<EnderecoViacepRepository> { EnderecoViacepRepository(get())}
     single<CategoriaRepository> { CategoriaRepository(get(),get())}
     single<EnderecoRepository> { EnderecoRepository(get()) }
     single<ProdutoRepository> { ProdutoRepository(get(),get()) }
@@ -93,6 +102,7 @@ val daoModule = module {
     single<LoginRepository> { LoginRepository(get()) }
     single<CategoriaWebClient> { CategoriaWebClient() }
     single<ProdutoWebClient> { ProdutoWebClient() }
+    single<EnderecoWebViacep> { EnderecoWebViacep() }
 }
 
 val uiModule = module {
@@ -124,6 +134,7 @@ val viewModelModule = module {
     viewModel<LoginViewModel> { LoginViewModel(get()) }
     viewModel<CategoriaViewModel> { CategoriaViewModel(get()) }
     viewModel<ProdutosViewModel> { (categoriaId: Long) -> ProdutosViewModel(categoriaId, get()) }
+    viewModel<EnderecoViacepViewModel> { EnderecoViacepViewModel(get()) }
     viewModel<EnderecoViewModel> { (clienteId: Long) -> EnderecoViewModel(clienteId, get()) }
     viewModel<CarrinhoViewModel> { (clienteId: Long) -> CarrinhoViewModel(clienteId, get()) }
     viewModel<ClienteViewModel> { (clienteId: Long) -> ClienteViewModel(clienteId, get()) }

@@ -1,6 +1,8 @@
 package br.com.mantunes.sped.webclient
+
 import br.com.mantunes.sped.webclient.services.CategoriaService
 import br.com.mantunes.sped.webclient.services.ProdutoService
+import br.com.mantunes.sped.webclient.services.EnderecoViacepService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -18,18 +20,26 @@ class RetrofitInicializador {
             .build()
     }
     private val retrofit: Retrofit by lazy {
-         Retrofit.Builder()
-        .baseUrl(BASE_URL)
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(client)
-        .build()
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(client)
+            .build()
     }
 
-    val categoriaService:CategoriaService by lazy {
+    val categoriaService: CategoriaService by lazy {
         retrofit.create(CategoriaService::class.java)
     }
     val produtoService: ProdutoService by lazy {
         retrofit.create(ProdutoService::class.java)
     }
-
+    val retrofitViacep: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl("https://viacep.com.br/ws/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+    val enderecoViacepService: EnderecoViacepService by lazy {
+        retrofitViacep.create(EnderecoViacepService::class.java)
+    }
 }

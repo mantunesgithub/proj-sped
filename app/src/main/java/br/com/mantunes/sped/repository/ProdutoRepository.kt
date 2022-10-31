@@ -87,8 +87,5 @@ class ProdutoRepository(
         }).execute()
     }
 
-//    fun buscaTodos(categoriaId: Long):
-//            LiveData<Resource<List<Produto>?>> =  dao.buscaTodos(categoriaId)
-//
     fun buscaPorId(id: Long): LiveData<Produto> = daoProduto.buscaPorId(id)
 }

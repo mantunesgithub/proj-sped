@@ -54,13 +54,6 @@ class ListaProdutosFragment : ClienteBaseLogadoFragment() {
             }
         })
     }
-//            viewModel.buscaTodos(categoriaIdSelecionada).observe(
-//            this, Observer { produtosEncontrados ->
-//            produtosEncontrados?.let {
-//                adapter.atualiza(it)
-//            }
-//        })
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

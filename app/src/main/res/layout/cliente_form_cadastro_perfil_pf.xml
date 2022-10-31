@@ -22,10 +22,8 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/txi_cliente_form_cadastro_perfil_pf_genero"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/txi_cliente_form_cadastro_perfil_pf_genero"
-            app:layout_constraintTop_toBottomOf="@id/txi_cliente_form_cadastro_perfil_pf_genero"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@id/txi_cliente_form_cadastro_perfil_pf_genero"/>
 
         <Button
             android:id="@+id/cliente_form_cadastro_perfil_pf_btn_alterar"
@@ -48,7 +46,7 @@
             android:id="@+id/cliente_form_cadastro_perfil_pf_imagem"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/colorAccent"
+            android:background="@color/design_default_color_secondary"
             android:scaleType="centerCrop"
             android:layout_margin="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -65,11 +63,12 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="136dp"
             android:background="@drawable/ic_fundo_camera"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.91"
+            app:layout_constraintHorizontal_bias="0.92"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cliente_form_cadastro_perfil_pf_imagem" />
+            app:layout_constraintTop_toTopOf="@+id/cliente_form_cadastro_perfil_pf_imagem" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txi_cliente_form_cadastro_perfil_pf_nome"

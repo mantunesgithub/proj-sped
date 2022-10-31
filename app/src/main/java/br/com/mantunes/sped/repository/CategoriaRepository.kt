@@ -67,7 +67,6 @@ class CategoriaRepository(
             }, quandoFinaliza = {}
         ).execute()
     }
-
     private fun salvaInterno(
         categoria: Categoria,
         quandoSucesso: () -> Unit
@@ -78,30 +77,4 @@ class CategoriaRepository(
             quandoSucesso()
         }).execute()
     }
-
-//    fun salva(
-//        categoria: Categoria
-//    ): LiveData<Resource<Void?>> {
-//        val liveData = MutableLiveData<Resource<Void?>>()
-//        salvaNaApi(categoria, quandoSucesso = {
-//            liveData.value = Resource(null)
-//        }, quandoFalha = { erro ->
-//            liveData.value = Resource(dado = null, erro = erro)
-//        })
-//        return liveData
-//    }
-//    private fun salvaNaApi(
-//        categoria: Categoria,
-//        quandoSucesso: () -> Unit,
-//        quandoFalha: (erro: String?) -> Unit
-//    ) {
-//        webClient.salva(
-//            categoria,
-//            quandoSucesso = {
-//                it?.let { categoriaSalva ->
-//                    salvaInterno(categoriaSalva, quandoSucesso)
-//                }
-//            }, quandoFalha = quandoFalha
-//        )
-//    }
 }

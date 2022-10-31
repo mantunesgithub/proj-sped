@@ -6,6 +6,7 @@
     <string name="numero_cartao">Número cartão</string>
     <string name="numero_cpf_cnpj">cpf/cnpj</string>
     <string name="numero_celular">celular (00)00000-0000</string>
+    <string name="endereco_viacep">Buscar o endereço via CEP</string>
     <string name="email">e-mail</string>
     <string name="aleatoria">chave aleatória</string>
     <string name="numero_cvc">Código segurança</string>
@@ -42,7 +43,7 @@
 
     <string name="ir_comprar">Vamos às Compras</string>
     <string name="promocao_do_dia">Promoções do Dia!</string>
-    <string name="footer">Aproveitem as Promoções de Hoje!</string>
+    <string name="footer">Mais Promoções ...</string>
     <string name="categoria">Esportes e Informática</string>
     <string name="comidas">Comidas</string>
     <string name="preco_80">R$ 80.00</string>
@@ -60,4 +61,6 @@
     <string name="endereco_salvo_com_sucesso">Endereço salvo com sucesso!</string>
     <string name="endereco_removido_ok">Endereco removido com sucesso!</string>
     <string name="autorizacao">br.com.mantunes.sped</string>
+    <string name="promocao_viewpage">Promoções da Semana</string>
+
 </resources>
