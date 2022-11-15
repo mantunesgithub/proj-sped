@@ -18,7 +18,7 @@ import org.koin.core.parameter.parametersOf
 import java.math.BigDecimal
 import java.nio.file.Files.find
 
-class ListaCarrinhoFragment : ClienteBaseLogadoFragment() {
+class CarrinhoListaFragment : ClienteBaseLogadoFragment() {
 
     private var totalCarrinho: BigDecimal = BigDecimal.ZERO
     var quandoClienteSaiDoApp: ()-> Unit = {}

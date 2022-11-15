@@ -13,7 +13,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 
-class DetalhesProdutoFragment : ClienteBaseLogadoFragment() {
+class ProdutoDetalhesFragment : ClienteBaseLogadoFragment() {
 
     private val viewModel: DetalhesProdutoViewModel by
                 viewModel { parametersOf(produtoIdSelecionado) }

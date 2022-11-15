@@ -61,7 +61,7 @@
         <Button
             android:id="@+id/pagamento_pedido_registrado_botao_continuar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:backgroundTint="@color/colorPrimary"
             android:layout_marginStart="8dp"

@@ -76,10 +76,8 @@ class EnderecoVisualizaDetalheFragment : Fragment() {
     }
 
     private fun preencheFormularioEndereco(enderecoEncontrado: Endereco) {
-        _binding.enderecoVisualizacaoEndereco.setText(
-            enderecoEncontrado.logradouro +
-                    ", " + enderecoEncontrado.numero
-        )
+        _binding.enderecoVisualizacaoEndereco.setText(enderecoEncontrado.logradouro)
+        _binding.enderecoVisualizacaoNumero.setText(enderecoEncontrado.numero)
         _binding.enderecoVisualizacaoComplemento.setText(enderecoEncontrado.complemento)
         _binding.enderecoVisualizacaoBairro.setText(enderecoEncontrado.bairro)
         _binding.enderecoVisualizacaoCidade.setText(enderecoEncontrado.cidade)

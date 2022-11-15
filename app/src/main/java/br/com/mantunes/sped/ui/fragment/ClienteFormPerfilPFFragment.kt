@@ -8,10 +8,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -27,7 +27,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.io.File
 
-class ClienteFormCadastroPerfilPFFragment : Fragment() {
+class ClienteFormPerfilPFFragment : Fragment() {
 
     private val controlador by lazy { findNavController() }
     private lateinit var _binding: ClienteFormCadastroPerfilPfBinding
@@ -54,18 +54,17 @@ class ClienteFormCadastroPerfilPFFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.i("TAG", "onViewCreated:-{ClienteFormCadastroPerfilPFFragment} chegou")
         buscaClienteLogado()
         abrirCamera()
         configuraBotaoAlterar()
         visualizaEnderecos()
-        activity?.title = TITULO_APPBAR_DADOS_PF
+        //activity?.title = TITULO_APPBAR_DADOS_PF
     }
 
     private fun visualizaEnderecos() {
         _binding.clienteFormCadastroPerfilPfBtnEnderecos.setOnClickListener {
             val direcao =
-                ClienteFormCadastroPerfilPFFragmentDirections.actionClienteFormCadPerfilpfFragmentToEnderecoCadastradosFragment()
+                ClienteFormPerfilPFFragmentDirections.actionClienteFormCadPerfilpfFragmentToEnderecoCadastradosFragment()
             controlador.navigate(direcao)
         }
     }
@@ -73,35 +72,24 @@ class ClienteFormCadastroPerfilPFFragment : Fragment() {
     private fun buscaClienteLogado() {
 
         clienteIdLogado = viewModelLogin.buscaLoginDoCliente()
-        Log.i(
-            "TAG",
-            "buscaClienteLogado: {ClienteFormCadastroPerfilPFFragment} clid= $clienteIdLogado"
-        )
         viewModel.buscaPorId(clienteIdLogado)
             .observe(viewLifecycleOwner, Observer { clienteObserver ->
                 clienteObserver?.let { cliente ->
                     clienteLogado = cliente
                     preencheCampos()
-                    Log.i("extende PF", "buscaClienteLogado: $clienteLogado")
                 }
             })
     }
 
     private fun preencheCampos() {
-        Log.i("TAG", "preencheCampos: {ClienteFormCadastroPerfilPFFragment} chegou $clienteLogado")
         clienteLogado?.let { clienteLogado ->
-            Log.i(
-                "TAG",
-                "preencheCampos: {ClienteFormCadastroPerfilPFFragment} cliente: $clienteLogado"
-            )
             _binding.clienteFormCadastroPerfilPfNome.setText(clienteLogado.nome)
             _binding.clienteFormCadastroPerfilPfCpf.setText(clienteLogado.cnpjCpf)
             _binding.clienteFormCadastroPerfilPfEmail.setText(clienteLogado.email)
-            _binding.clienteFormCadastroPerfilPfSenha.setText(clienteLogado.senha)
             _binding.clienteFormCadastroPerfilPfDtNascimento.setText(clienteLogado.dataNascimento)
             _binding.clienteFormCadastroPerfilPfNaturalidade.setText(clienteLogado.naturalidade)
             _binding.clienteFormCadastroPerfilPfGenero.setText(clienteLogado.genero)
-            _binding.clienteFormCadastroPerfilPfFoneCom.setText(clienteLogado.telefoneCom)
+            _binding.clienteFormCadastroPerfilPfFoneCel.setText(clienteLogado.telefoneCel)
             _binding.clienteFormCadastroPerfilPfFoneRes.setText(clienteLogado.telefoneRes)
             _binding.clienteFormCadastroPerfilPfFoneOutr.setText(clienteLogado.telefoneOutro)
             carregaImagem(clienteLogado.caminhoFoto)
@@ -110,43 +98,92 @@ class ClienteFormCadastroPerfilPFFragment : Fragment() {
 
     private fun configuraBotaoAlterar() {
         _binding.clienteFormCadastroPerfilPfBtnAlterar.setOnClickListener {
-            alteraDadosCliente()
-            mostraMsg("Perfil atualizado com sucesso!")
+            if (alteraDadosCliente()) {
+                mostraMsg("Perfil atualizado com sucesso!")
+            }
         }
     }
 
-    private fun alteraDadosCliente() {
+    private fun alteraDadosCliente(): Boolean {
         var idLogado: Long = 0L
         clienteLogado?.let {
-            idLogado = it.id
-            Log.i("TAG", "alteraDadosCliente: id logado = $idLogado")
 
-            val nome = _binding.clienteFormCadastroPerfilPfNome.text.toString()
-            val senha = _binding.clienteFormCadastroPerfilPfSenhaNova.text.toString()
-            val tipo: String = "PF"
-            val cpf = _binding.clienteFormCadastroPerfilPfCpf.text.toString()
-            val email = _binding.clienteFormCadastroPerfilPfEmail.text.toString()
-            val dataNascimento = _binding.clienteFormCadastroPerfilPfDtNascimento.text.toString()
-            val naturalidade = _binding.clienteFormCadastroPerfilPfNaturalidade.text.toString()
-            val foneResidencial = _binding.clienteFormCadastroPerfilPfFoneRes.text.toString()
-            val foneComercial = _binding.clienteFormCadastroPerfilPfFoneCom.text.toString()
-            val foneOutro = _binding.clienteFormCadastroPerfilPfFoneOutr.text.toString()
-            val genero = _binding.clienteFormCadastroPerfilPfGenero.text.toString()
-            if (_binding.clienteFormCadastroPerfilPfImagem.getTag() != null) {
-                val caminhoFoto = _binding.clienteFormCadastroPerfilPfImagem.getTag() as String
-            }
-            atualiza(
-                Cliente(
-                    idLogado, nome, tipo, cpf, email, senha, dataNascimento, naturalidade,
-                    genero, "", "", "", foneResidencial, foneComercial,
-                    foneOutro, caminhoFoto
+            if (!ValidaFormPerfilPFFragment()) {
+
+                idLogado = it.id
+                val nome = _binding.clienteFormCadastroPerfilPfNome.text.toString()
+                var senha: String = it.senha
+                if (!_binding.clienteFormCadastroPerfilPfSenhaNova.text.isNullOrBlank()) {
+                    mostraMsg("Senha alterada")
+                    senha = _binding.clienteFormCadastroPerfilPfSenhaNova.text.toString()
+                }
+                val tipo: String = getString(R.string.pessoa_fisica)
+                val cpf = _binding.clienteFormCadastroPerfilPfCpf.text.toString()
+                val email = _binding.clienteFormCadastroPerfilPfEmail.text.toString()
+                val dataNascimento =
+                    _binding.clienteFormCadastroPerfilPfDtNascimento.text.toString()
+                val naturalidade = _binding.clienteFormCadastroPerfilPfNaturalidade.text.toString()
+                val foneCelular = _binding.clienteFormCadastroPerfilPfFoneCel.text.toString()
+                val foneResidencial = _binding.clienteFormCadastroPerfilPfFoneRes.text.toString()
+                val foneOutro = _binding.clienteFormCadastroPerfilPfFoneOutr.text.toString()
+                val genero = _binding.clienteFormCadastroPerfilPfGenero.text.toString()
+                if (_binding.clienteFormCadastroPerfilPfImagem.getTag() != null) {
+                    val caminhoFoto = _binding.clienteFormCadastroPerfilPfImagem.getTag() as String
+                }
+                atualiza(
+                    Cliente(
+                        idLogado, nome, tipo, cpf, email, senha, dataNascimento, naturalidade,
+                        genero, "", "", "", foneResidencial, foneCelular,
+                        foneOutro, caminhoFoto
+                    )
                 )
-            )
+                return true
+            } else {
+                return false
+            }
         }
+        return false
     }
 
+    private fun ValidaFormPerfilPFFragment(): Boolean {
+        var error = false
+        if (_binding.clienteFormCadastroPerfilPfNome.text.isNullOrBlank()) {
+            _binding.clienteFormCadastroPerfilPfNome.error = "Digite seu nome"
+            error = true
+        }
+        if (_binding.clienteFormCadastroPerfilPfCpf.text.isNullOrBlank()) {
+            _binding.clienteFormCadastroPerfilPfCpf.error = "Digite seu cpf"
+            error = true
+        }
+        if (_binding.clienteFormCadastroPerfilPfEmail.text.isNullOrBlank()) {
+            _binding.clienteFormCadastroPerfilPfEmail.error = "Digite seu email"
+            error = true
+        }
+        if (_binding.clienteFormCadastroPerfilPfDtNascimento.text.isNullOrBlank()) {
+            _binding.clienteFormCadastroPerfilPfDtNascimento.error = "Digite sua Data Nascimento"
+            error = true
+        }
+        if (_binding.clienteFormCadastroPerfilPfNaturalidade.text.isNullOrBlank()) {
+            _binding.clienteFormCadastroPerfilPfNaturalidade.error = "Digite sua Naturalidade"
+            error = true
+        }
+        if (_binding.clienteFormCadastroPerfilPfFoneCel.text.isNullOrBlank()) {
+            _binding.clienteFormCadastroPerfilPfFoneCel.error = "Digite seu telefone Celular"
+            error = true
+        }
+        if (_binding.clienteFormCadastroPerfilPfGenero.text.isNullOrBlank()) {
+            _binding.clienteFormCadastroPerfilPfGenero.error = "Digite Genero M/F"
+        }
+        if (_binding.clienteFormCadastroPerfilPfGenero.text.toString() != "M" &&
+            _binding.clienteFormCadastroPerfilPfGenero.text.toString() != "F" ) {
+            _binding.clienteFormCadastroPerfilPfGenero.error = "Digite Genero M ou F"
+            error = true
+        }
+        return error
+    }
+
+
     private fun atualiza(cliente: Cliente) {
-        Log.i("TAG", "atualiza cliente = : $cliente")
         viewModel.atualiza(cliente).observe(viewLifecycleOwner, Observer {
             it?.dado?.let {
             }
@@ -155,7 +192,6 @@ class ClienteFormCadastroPerfilPFFragment : Fragment() {
 
     private fun abrirCamera() {
         _binding.clienteFormCadastroPerfilPfBotaoCamera.setOnClickListener {
-            Log.i("TAG", "abrirCamera: clicou")
             val intentCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             intentCamera.addFlags(
                 Intent.FLAG_GRANT_READ_URI_PERMISSION or
@@ -176,7 +212,6 @@ class ClienteFormCadastroPerfilPFFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == CODIGO_CAMERA && uriImagem != null) {      //CAMERA
-                Log.i("TAG", "onActivityResult: carregou imagem $caminhoFoto")
                 carregaImagem(caminhoFoto)
                 _binding.clienteFormCadastroPerfilPfImagem.setImageURI(uriImagem)
             }

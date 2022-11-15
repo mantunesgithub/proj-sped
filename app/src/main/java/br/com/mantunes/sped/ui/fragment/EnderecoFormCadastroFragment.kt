@@ -169,8 +169,6 @@ class EnderecoFormCadastroFragment : Fragment() {
         val direcao =
             EnderecoFormCadastroFragmentDirections.actionEnderecoFormCadastroFragmentToEnderecoCadastradosFragment()
         controlador.navigate(direcao)
-//        controlador.navigate(
-//            R.id.action_enderecoFormCadastroFragment_to_enderecoCadastradosFragment)
     }
 
     private fun configuraTipoEndereco() {

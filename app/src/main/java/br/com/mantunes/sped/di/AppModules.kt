@@ -25,7 +25,6 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-import java.math.BigDecimal
 
 private const val NOME_BANCO_DE_DADOS = "sped.db"
 private const val NOME_BANCO_DE_DADOS_TESTE = "sped-test.db"
@@ -41,34 +40,19 @@ val testeDatabaseModule = module {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
                     CoroutineScope(IO).launch {
-                            val daoCategoria : CategoriaDAO by inject ()
-
-                            val listaCategorias: List<Categoria> = listOf(
-                            Categoria(
-                                id = 0,
-                                nome = "Esportes",
-                                descricao = "Material de futebol",
-                                imagem = "https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            ),
-                            Categoria(
-                                id = 0,
-                                nome = "Informatica",
-                                descricao = "Material de informatica",
-                                imagem = "https://images.pexels.com/photos/8720619/pexels-photo-8720619.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            ))
-
- //                       daoCategoria.salva(listaCategorias)
-//
-//                        }else {
-//                            Log.e("AppModule", "ATENÇÃO: Erro na Inicialização" )
-//                        }
-
+                        val daoCategoria : CategoriaDAO by inject ()
+                        val listaCategorias: List<Categoria> = criaCategorias()
+                        daoCategoria.salva(listaCategorias)
+                        Log.i("TAG", "onCreate: Salvou cate $listaCategorias")
+                        val daoProduto : ProdutoDAO by inject ()
+                        val listaProdutos: List<Produto> = criaProdutos()
+                        daoProduto.salva(listaProdutos)
+                        Log.i("TAG", "onCreate: Salvou prod $listaProdutos")
                     }
                 }
             }).build()
     }
 }
-
 val databaseModule = module {
     single<AppDatabase> {
         Room.databaseBuilder(
@@ -106,22 +90,23 @@ val daoModule = module {
 }
 
 val uiModule = module {
-    factory<ClienteFormCadastroPerfilPFFragment> { ClienteFormCadastroPerfilPFFragment() }
-    factory<ClienteFormCadastroFragment> { ClienteFormCadastroFragment() }
-    factory<DetalhesProdutoFragment> { DetalhesProdutoFragment() }
-    factory<ListaCategoriasFragment> { ListaCategoriasFragment() }
+    factory<ClienteFormPerfilPFFragment> { ClienteFormPerfilPFFragment() }
+    factory<ClienteCadastroInicialFragment> { ClienteCadastroInicialFragment() }
+    factory<LoginFragment> { LoginFragment() }
+    factory<ProdutoDetalhesFragment> { ProdutoDetalhesFragment() }
+    factory<CategoriaListaFragment> { CategoriaListaFragment() }
     factory<ListaProdutosFragment> { ListaProdutosFragment() }
     factory<EnderecoFragment> { EnderecoFragment() }
     factory<PagamentoComBoletoFragment> { PagamentoComBoletoFragment() }
     factory<PagamentoComPixFragment> { PagamentoComPixFragment() }
     factory<PagamentoComCartaoFragment> { PagamentoComCartaoFragment() }
-    factory<FormaPagamentoFragment> { FormaPagamentoFragment() }
+    factory<PagamentoFormasFragment> { PagamentoFormasFragment() }
     factory<PedidoFragment> { PedidoFragment() }
-    factory<ListaCarrinhoFragment> { ListaCarrinhoFragment() }
-    factory<PagamentoDoPedidoConfirmadoFragment> { PagamentoDoPedidoConfirmadoFragment() }
+    factory<CarrinhoListaFragment> { CarrinhoListaFragment() }
+    factory<PagamentoConfirmadoFragment> { PagamentoConfirmadoFragment() }
     factory<PagamentoRegistradoFragment> { PagamentoRegistradoFragment() }
-    factory<AdicionaNoCarrinhoFragment> { AdicionaNoCarrinhoFragment() }
-    factory<AtualizaMaisUmNoCarrinhoFragment> { AtualizaMaisUmNoCarrinhoFragment() }
+    factory<CarrinhoAdicionaProdutosFragment> { CarrinhoAdicionaProdutosFragment() }
+    factory<CarrinhoAtualizaMaisUmFragment> { CarrinhoAtualizaMaisUmFragment() }
     factory<ProdutosAdapter> { ProdutosAdapter(get()) }
     factory<CategoriaAdapter> { CategoriaAdapter(get()) }
     factory<CarrinhoAdapter> { CarrinhoAdapter(get()) }

@@ -10,7 +10,7 @@ import br.com.mantunes.sped.ui.viewmodel.CarrinhoViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class AdicionaNoCarrinhoFragment : ClienteBaseLogadoFragment() {
+class CarrinhoAdicionaProdutosFragment : ClienteBaseLogadoFragment() {
 
     private val viewModel: CarrinhoViewModel by viewModel { parametersOf(clienteIdCarrinho) }
     var quandoSalvaCarrinho: (idCarrinho: Long) -> Unit = {}

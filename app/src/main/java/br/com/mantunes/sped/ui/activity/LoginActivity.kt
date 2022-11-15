@@ -1,69 +1,72 @@
 package br.com.mantunes.sped.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import br.com.mantunes.sped.R
-import br.com.mantunes.sped.extensions.toast
 import br.com.mantunes.sped.extensions.vaiPara
 import br.com.mantunes.sped.ui.fragment.*
-import br.com.mantunes.sped.ui.viewmodel.ClienteViewModel
-import br.com.mantunes.sped.ui.viewmodel.LoginViewModel
-import kotlinx.android.synthetic.main.login.*
 import org.koin.android.ext.android.inject
-import org.koin.android.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
-
 
 class LoginActivity : AppCompatActivity() {
-    private val clienteId: Long = 0
-    private val viewModel: ClienteViewModel by viewModel { parametersOf(clienteId) }
-    private val viewModelLogin: LoginViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login)
-        supportActionBar?.hide()
-        configuraBotaoCadastrar()
-        configuraBotaoEntrar()
-    }
+        setContentView(R.layout.activity_login)
 
-    private fun configuraBotaoEntrar() {
-        login_botao_entrar.setOnClickListener {
-            val email = login_email.text.toString()
-            val senha = login_senha.text.toString()
-            Log.i("{LoginActivity}", "configuraBotaoEntrar: $email / $senha")
-            autentica(email, senha)
+        if (savedInstanceState == null) {
+            val loginFragment: LoginFragment by inject()
+            Log.i("TAG", "onCreate: Login passou savedInstance ")
+            transacaoFragment {
+                //addToBackStack("R.id.login")
+                replace(R.id.login_container, loginFragment)
+            }
         }
     }
 
-    private fun autentica(email: String, senha: String) {
-
-        viewModel.autentica(email, senha).observe(
-            this, Observer {
-                it?.let { clienteEncontrado ->
-//                    val prefs =
-//                       getSharedPreferences(FILE_PREFERENCE, MODE_PRIVATE) // Declare xml file
-//                    prefs.edit().putLong(CHAVE_LOGIN_CLIENTE, clienteEncontrado.id).apply()
-                    viewModelLogin.salvaIdDoCliente(clienteEncontrado)
-                    vaiPara(MainActivityNavigationDrawer::class.java) { finish() }
-
-                } ?: toast("Cliente não encontrado - Cadastrar o Cliente")
-            })
+    override fun onAttachFragment(fragment: Fragment) {
+        super.onAttachFragment(fragment)
+        when (fragment) {
+            is LoginFragment -> {
+                configuraLogin(fragment)
+            }
+            is ClienteCadastroInicialFragment -> {
+                configuraCadastroInicial(fragment)
+            }
+        }
     }
 
-    fun configuraBotaoCadastrar() {
-        login_botao_cadastrar.setOnClickListener {
-            it?.let {
-                val clienteFormCadastroFragment: ClienteFormCadastroFragment by inject()
-                setContentView(R.layout.activity_main)
+    private fun configuraLogin(fragment: LoginFragment) {
+        fragment.apply {
+            quandoAutenticaOk = {
+                vaiPara(MainActivityNavigationDrawer::class.java)
+                { finish() }
+            }
+            quandoCadastroInicial = {
+                val clienteCadastroInicialFragment: ClienteCadastroInicialFragment by inject()
                 transacaoFragment {
-                    replace(R.id.container, clienteFormCadastroFragment)
+                    addToBackStack(null)
+                    replace(R.id.login_container, clienteCadastroInicialFragment)
                 }
             }
         }
     }
+
+    private fun configuraCadastroInicial(fragment: ClienteCadastroInicialFragment) {
+        fragment.apply {
+            quandoEfetuaCadastroInicial = ::vaiParaLogin
+        }
+    }
+
+    fun vaiParaLogin() {
+        vaiPara(LoginActivity::class.java) {
+            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            finish()
+        }
+    }
 }
-
-

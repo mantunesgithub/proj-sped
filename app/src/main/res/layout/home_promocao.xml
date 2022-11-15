@@ -33,10 +33,14 @@
         android:id="@+id/txt_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginTop="20dp"
-        android:padding="10dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@id/txt_desc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/img"
         tools:text="Nome do produto" />
 
@@ -44,31 +48,42 @@
         android:id="@+id/txt_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:textSize="16sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-        app:layout_constraintBottom_toBottomOf="@id/txt_valor_ant"
         app:layout_constraintTop_toBottomOf="@id/txt_nome"
+        app:layout_constraintBottom_toTopOf="@id/txt_valor_ant"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:text="Descricao do produto" />
 
     <TextView
         android:id="@+id/txt_valor_ant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         app:layout_constraintTop_toBottomOf="@id/txt_desc"
-        tools:text="de   R$200,00" />
+        app:layout_constraintStart_toStartOf="@id/txt_desc"
+        app:layout_constraintEnd_toStartOf="@id/txt_valor_atu"
+        tools:text="de  R$200,00" />
 
     <TextView
         android:id="@+id/txt_valor_atu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:textColor="@color/design_default_color_secondary_variant"
+        android:textColor="@color/colorAccent"
         android:textStyle="italic|bold"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textSize="16sp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
         app:layout_constraintTop_toBottomOf="@id/txt_desc"
         app:layout_constraintStart_toEndOf="@id/txt_valor_ant"
-        tools:text="por   R$100,00" />
+        tools:text="por  R$100,00" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

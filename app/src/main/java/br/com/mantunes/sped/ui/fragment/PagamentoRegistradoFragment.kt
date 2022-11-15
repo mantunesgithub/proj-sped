@@ -30,6 +30,7 @@ class PagamentoRegistradoFragment : ClienteBaseLogadoFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         buscaClienteLogado()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -41,6 +42,8 @@ class PagamentoRegistradoFragment : ClienteBaseLogadoFragment() {
         when (item.itemId) {
             R.id.menu_app_sair -> {
                 quandoClienteSaiDoApp()
+            }R.id.menu_app_home -> {
+                quandoReiniciaCompras()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -53,6 +56,7 @@ class PagamentoRegistradoFragment : ClienteBaseLogadoFragment() {
         pagamento_pedido_registrado_idPedido.text = numeroPedido
         excluiCarrinhoDoCliente()
         configuraBotaoContinuarComprando()
+
         activity?.title = TITULO_APPBAR_PEDIDO_REGISTRADO
     }
 
@@ -61,9 +65,10 @@ class PagamentoRegistradoFragment : ClienteBaseLogadoFragment() {
             it?.let { quandoReiniciaCompras() }
         }
     }
+
     private fun excluiCarrinhoDoCliente() {
         viewModel.exclui(clienteIdLogado)
-            .observe(this, Observer { idRetorno ->
+            .observe(viewLifecycleOwner, Observer { idRetorno ->
                 idRetorno?.dado?.let {
                 }
             })

@@ -206,7 +206,7 @@
         <Button
             android:id="@+id/lista_pedido_botao_confirmar_pedido"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:backgroundTint="@color/colorPrimary"
             android:layout_marginStart="16dp"
@@ -218,7 +218,7 @@
         <Button
             android:id="@+id/lista_pedido_botao_voltar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:backgroundTint="@android:color/transparent"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"

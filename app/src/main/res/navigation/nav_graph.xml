@@ -14,9 +14,6 @@
             android:id="@+id/action_homeFragment_to_mainActivity"
             app:destination="@id/mainActivity" />
         <action
-            android:id="@+id/action_homeFragment_to_loginActivity"
-            app:destination="@id/loginActivity" />
-        <action
             android:id="@+id/action_homeFragment_to_clienteFormCadastroPerfilPFFragment"
             app:destination="@id/cliente_form_cad_perfilpf_fragment"
             app:enterAnim="@android:anim/slide_in_left"
@@ -30,10 +27,18 @@
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_home_fragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+
     </fragment>
     <fragment
         android:id="@+id/cliente_form_cad_perfilpf_fragment"
-        android:name="br.com.mantunes.sped.ui.fragment.ClienteFormCadastroPerfilPFFragment"
+        android:name="br.com.mantunes.sped.ui.fragment.ClienteFormPerfilPFFragment"
         android:label="@string/txv_perfil"
         tools:layout="@layout/cliente_form_cadastro_perfil_pf" >
         <action
@@ -58,8 +63,9 @@
         android:name="br.com.mantunes.sped.ui.activity.MainActivity"
         android:label="Comprar" />
     <activity
-        android:id="@+id/loginActivity"
-        android:name="br.com.mantunes.sped.ui.activity.LoginActivity" />
+        android:id="@+id/mainActivityNavigationDrawer"
+        android:name="br.com.mantunes.sped.ui.activity.MainActivityNavigationDrawer"
+        android:label="Navi Drawer" />
     <fragment
         android:id="@+id/enderecoCadastradosFragment"
         android:name="br.com.mantunes.sped.ui.fragment.EnderecoCadastradosFragment"
@@ -129,5 +135,15 @@
         <argument
             android:name="endereco"
             app:argType="br.com.mantunes.sped.model.Endereco" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="br.com.mantunes.sped.ui.fragment.LoginFragment"
+        android:label="Login "
+        tools:layout="@layout/login">
+
+        <action
+            android:id="@+id/action_loginFragment_to_mainActivityNavigationDrawer"
+            app:destination="@id/mainActivityNavigationDrawer" />
     </fragment>
 </navigation>

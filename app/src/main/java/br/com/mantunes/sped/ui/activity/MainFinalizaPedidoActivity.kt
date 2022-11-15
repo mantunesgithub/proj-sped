@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.extensions.vaiPara
 import br.com.mantunes.sped.model.*
@@ -49,7 +50,7 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
             is EnderecoFragment -> {
                 configuraEnderecos(fragment)
             }
-            is FormaPagamentoFragment -> {
+            is PagamentoFormasFragment -> {
                 verificaFormaPagamento(fragment)
             }
             is PagamentoComCartaoFragment -> {
@@ -65,15 +66,16 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
                 Log.i("VoltarIs", "onAttachFragment: ")
                 pagamentoDoPedidoConfirmadoFragment(fragment)
             }
-            is PagamentoDoPedidoConfirmadoFragment -> {
+            is PagamentoConfirmadoFragment -> {
                 configuraPagamentoDoPedidoConfirmadoFragment(fragment)
             }
             is PagamentoRegistradoFragment -> {
                 fragment.quandoReiniciaCompras = {
                     Log.i("Reinicia", "onAttachFragment: ")
-                    Intent(this, MainActivity::class.java).apply {
-                        putExtra(CHAVE_DESTINO, "categoria")
-                        startActivity(this)
+                    vaiPara(MainActivityNavigationDrawer::class.java) {
+                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        finish()
                     }
                 }
                 fragment.quandoClienteSaiDoApp = ::vaiParaLogin
@@ -81,13 +83,14 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
         }
     }
 
+
     private fun pagamentoDoPedidoConfirmadoFragment(fragment: PedidoFragment) {
         fragment.quandoBotaoVoltar = {
-            Intent(this, MainActivity::class.java).apply {
-                putExtra(CHAVE_DESTINO, "categoria")
-                startActivity(this)
+                vaiPara(MainActivityNavigationDrawer::class.java) {
+                    addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    finish()
             }
-
         }
 
         fragment.apply {
@@ -97,7 +100,7 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
         }
     }
 
-    private fun verificaFormaPagamento(fragment: FormaPagamentoFragment) {
+    private fun verificaFormaPagamento(fragment: PagamentoFormasFragment) {
         fragment.apply {
             quandoSelecionaPagamento = { pedidoDTOComFormaPagamento ->
                 if (pedidoDTOComFormaPagamento?.tipoPagamento == TIPO_PAGAMENTO.CARTAO) {
@@ -150,7 +153,7 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
         }
     }
 
-    private fun configuraPagamentoDoPedidoConfirmadoFragment(fragment: PagamentoDoPedidoConfirmadoFragment) {
+    private fun configuraPagamentoDoPedidoConfirmadoFragment(fragment: PagamentoConfirmadoFragment) {
         fragment.apply {
             quandoPagamentoSalvo = { idPedidoRegistrado ->
 
@@ -161,6 +164,10 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
                 )
                 pagamentoRegistradoFragment.arguments = argumentos
                 transacaoFragment {
+                    supportFragmentManager.popBackStack()
+                    supportFragmentManager.popBackStack()
+                    supportFragmentManager.popBackStack()
+                    supportFragmentManager.popBackStack()
                     replace(R.id.container, pagamentoRegistradoFragment)
                 }
             }
@@ -170,21 +177,21 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
     fun configuraEnderecos(fragment: EnderecoFragment) {
         fragment.apply {
             quandoEnderecoSelecionado = { pedidoDTOComEndereco ->
-                val formaPagamentoFragment: FormaPagamentoFragment by inject()
+                val pagamentoFormasFragment: PagamentoFormasFragment by inject()
                 val argumentos = bundleOf(
                     CHAVE_PEDIDODTO_ARGS to pedidoDTOComEndereco
                 )
-                formaPagamentoFragment.arguments = argumentos
+                pagamentoFormasFragment.arguments = argumentos
                 transacaoFragment {
                     addToBackStack(null)
-                    replace(R.id.container, formaPagamentoFragment)
+                    replace(R.id.container, pagamentoFormasFragment)
                 }
             }
         }
     }
 
     fun configuraConfirmarPagamentoDoPedido(pedidoDTOPagamentoConfirmado: PedidoDTO?) {
-        val confirmaPagamentoDoPedidoFragment: PagamentoDoPedidoConfirmadoFragment by inject()
+        val confirmaPagamentoDoPedidoFragment: PagamentoConfirmadoFragment by inject()
         val argumentos = bundleOf(
             CHAVE_PEDIDODTO_ARGS to pedidoDTOPagamentoConfirmado,
             CHAVE_CLIENTE_ARGS to clienteIdLogin
@@ -240,24 +247,24 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
         prefs.edit().remove(CHAVE_LOGIN_CLIENTE).commit();
         vaiPara(LoginActivity::class.java) {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             finish()
         }
     }
 
     private fun buscaLoginDoCliente(): Long {
-//        val sp = getSharedPreferences(FILE_PREFERENCE, MODE_PRIVATE)
-//        val clienteIdLogin: Long = sp.getLong(CHAVE_LOGIN_CLIENTE, -1)
         val clienteIdLogin: Long = viewModelLogin.buscaLoginDoCliente()
         return clienteIdLogin
     }
 
     fun inicializaPedidoDTO(): PedidoDTO {
-        val clienteLogado = Cliente(0L, "null", "", "", "", "",""
-        ,"","","","","","","","",
-        "")
+        val clienteLogado = Cliente(
+            0L, "null", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            ""
+        )
         val endereco = Endereco(
             0L, "null", "", "", "", "", "",
-            "", "", "",0L,
+            "", "", "", 0L,
         )
         val listaCarrinho: MutableList<Carrinho> = mutableListOf()
         return PedidoDTO(
@@ -266,3 +273,13 @@ class MainFinalizaPedidoActivity : AppCompatActivity() {
         )
     }
 }
+//    override fun onBackPressed() {
+//        Log.i("TAG", "onBackPressed: MainFinalizaPedidoActivity")
+//        val fragment =
+//            this.supportFragmentManager.findFragmentById(R.id.container)
+//        (fragment as? OnBackPressListenerFragment.IOnBackPressed)?.onBackPressed()?.not()?.let {
+//            super.onBackPressed()
+//        }
+//    }
+//        val sp = getSharedPreferences(FILE_PREFERENCE, MODE_PRIVATE)
+//        val clienteIdLogin: Long = sp.getLong(CHAVE_LOGIN_CLIENTE, -1)

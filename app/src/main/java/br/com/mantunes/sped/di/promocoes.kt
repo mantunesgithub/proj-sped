@@ -10,23 +10,24 @@ fun criaPromocoes() : List <Promocao> {
             R.drawable.imagem_bola,
             "Bola Futebol",
             "Bola de futebol de campo e socciet da marca penalt",
-            "de R$ 200,00", " por R$ 185,00"
+            "de R$ 200,00 ",
+            "por R$ 185,00"
         ),
         Promocao(
             "Informatica",
             R.drawable.imagem_notebook,
             "Notebook",
-            "Notebook Dell Inspiron 15 3000 a0500-MM10S 15.6 FHD AMD Ryzen 5 8GB 256GB SSD Windows 11 Prata" +
-                    "A tela Full HD de 15,6”, antirreflexo de alta definição com três lados de bordas finas" ,
-            "de R$ 4000,00", " por R$ 3185,00"
+            "Notebook Dell Inspiron 15 8GB 256GB SSD 11 Prata",
+            "de R$ 4.000,00 ",
+            "por R$ 3.185,00"
         ),
         Promocao(
             "Moda Masculino",
             R.drawable.imagem_camisas,
             "Camiseta Masculina Básica Bluhen Nicarágua",
-            "A Camiseta Masculina Básica Bluhen é confeccionada em malha na cor azul, contendo modelagem" +
-                    " tradicional, gola em ribana para melhor ajuste, mangas curtas com excelente caimento." ,
-            "de R$ 80,00"," por R$ 65,00"
+            "A Camiseta Masculina Básica Bluhen é confeccionada em malha na cor azul, contendo modelagem",
+            "de R$ 80,00 ",
+            "por R$ 65,00"
         )
     )
     return listaPromocoes

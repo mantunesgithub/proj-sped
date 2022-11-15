@@ -20,7 +20,7 @@ data class Cliente (
     val incricaoEstatual: String,
     val isentoIE: String,
     val telefoneRes: String,
-    val telefoneCom: String,
+    val telefoneCel: String,
     val telefoneOutro: String,
     val caminhoFoto : String? = null
 )

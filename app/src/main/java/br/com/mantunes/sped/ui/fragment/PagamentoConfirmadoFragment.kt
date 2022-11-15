@@ -14,7 +14,7 @@ import br.com.mantunes.sped.ui.viewmodel.PedidoViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.math.BigDecimal
 
-class PagamentoDoPedidoConfirmadoFragment : ClienteBaseLogadoFragment() {
+class PagamentoConfirmadoFragment : ClienteBaseLogadoFragment() {
     private val viewModelPedido: PedidoViewModel by viewModel()
     private val viewModelItensDoPedido: ItensDoPedidoViewModel by viewModel()
     private val viewModelPagamento: PagamentoViewModel by viewModel()

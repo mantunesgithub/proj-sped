@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.fragment.ClienteFormCadastroFragment">
+        tools:context=".ui.fragment.ClienteCadastroInicialFragment">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputlayout_nome"
@@ -17,9 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:importantForAutofill="no"
-            android:inputType="textCapWords"
-            tools:targetApi="o"
+            app:errorTextAppearance="@style/ErrorTextAppearance"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -29,7 +27,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nome"
-                android:inputType="text" />
+                android:importantForAutofill="no"
+                android:inputType="textCapWords"
+                tools:targetApi="o"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -39,6 +39,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            app:errorTextAppearance="@style/ErrorTextAppearance"
             app:layout_constraintEnd_toEndOf="@id/textInputlayout_nome"
             app:layout_constraintStart_toStartOf="@id/textInputlayout_nome"
             app:layout_constraintTop_toBottomOf="@id/textInputlayout_nome">
@@ -57,6 +58,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            app:errorTextAppearance="@style/ErrorTextAppearance"
             app:layout_constraintEnd_toEndOf="@id/textInputlayout_tipoPessoa"
             app:layout_constraintStart_toStartOf="@id/textInputlayout_tipoPessoa"
             app:layout_constraintTop_toBottomOf="@id/textInputlayout_tipoPessoa">
@@ -75,6 +77,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            app:errorTextAppearance="@style/ErrorTextAppearance"
             app:layout_constraintEnd_toEndOf="@id/textInputlayout_cpfCnpj"
             app:layout_constraintStart_toStartOf="@id/textInputlayout_cpfCnpj"
             app:layout_constraintTop_toBottomOf="@id/textInputlayout_cpfCnpj">
@@ -84,15 +87,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
-                android:inputType="text" />
+                android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputlayout_senha"
+            android:id="@+id/textInputlayout_cadastro_senha"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            app:errorTextAppearance="@style/ErrorTextAppearance"
             app:layout_constraintEnd_toEndOf="@id/textInputlayout_email"
             app:layout_constraintStart_toStartOf="@id/textInputlayout_email"
             app:layout_constraintTop_toBottomOf="@id/textInputlayout_email">
@@ -111,12 +115,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="Cadastrar"
+            android:textAllCaps="false"
+            android:backgroundTint="#28BF79"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
             android:clickable="true"
             android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/textInputlayout_senha"
-            app:layout_constraintStart_toStartOf="@id/textInputlayout_senha"
-            app:layout_constraintTop_toBottomOf="@id/textInputlayout_senha"
+            app:layout_constraintEnd_toEndOf="@id/textInputlayout_cadastro_senha"
+            app:layout_constraintStart_toStartOf="@id/textInputlayout_cadastro_senha"
+            app:layout_constraintTop_toBottomOf="@id/textInputlayout_cadastro_senha"
             app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

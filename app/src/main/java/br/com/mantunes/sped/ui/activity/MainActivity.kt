@@ -1,15 +1,12 @@
 package br.com.mantunes.sped.ui.activity
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.Settings.Global.putLong
-import android.system.Os.remove
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.edit
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.extensions.vaiPara
 import br.com.mantunes.sped.model.Carrinho
@@ -20,7 +17,6 @@ import br.com.mantunes.sped.ui.fragment.*
 import br.com.mantunes.sped.ui.viewmodel.LoginViewModel
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
-import retrofit2.Retrofit
 
 class MainActivity : AppCompatActivity() {
     var clienteIdLogin: Long = 0L
@@ -29,21 +25,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-//        clienteIdLogin = buscaLoginDoCliente()
         clienteIdLogin = viewModelLogin.buscaLoginDoCliente()
         if (clienteIdLogin < 0) {
             vaiParaLogin()
         }
 
         tentaCarregarDestino()?.let {
-//            intent.removeExtra(CHAVE_DESTINO)
             if (it == "categoria") { vaiParaListaCategoria(clienteIdLogin) }
             if (it == "carrinho") {
                 Log.i("CarrinhoGo", "onCreate: {MainActivity}")
                 vaiParaListaCarrinho(clienteIdLogin) }
         }
         if (savedInstanceState == null) {
-            val listaCategoriasFragment: ListaCategoriasFragment by inject()
+            val listaCategoriasFragment: CategoriaListaFragment by inject()
             val argumentos = bundleOf(
                 CHAVE_CLIENTE_ARGS to clienteIdLogin
             )
@@ -59,28 +53,28 @@ class MainActivity : AppCompatActivity() {
 
         when (fragment) {
 
-            is ListaCategoriasFragment -> {
+            is CategoriaListaFragment -> {
                 configuraListaCategoria(fragment)
             }
             is ListaProdutosFragment -> {
                 configuraListaProdutos(fragment)
             }
-            is DetalhesProdutoFragment -> {
+            is ProdutoDetalhesFragment -> {
                 configuraDetalheDoProduto(fragment)
             }
-            is AdicionaNoCarrinhoFragment -> {
+            is CarrinhoAdicionaProdutosFragment -> {
                 configuraAdicionaNoCarrinho(fragment)
             }
-            is ListaCarrinhoFragment -> {
+            is CarrinhoListaFragment -> {
                 configuraListaCarrinho(fragment)
             }
-            is AtualizaMaisUmNoCarrinhoFragment -> {
+            is CarrinhoAtualizaMaisUmFragment -> {
                 configuraAtualizaMaisUmNoCarrinho(fragment)
             }
         }
     }
 
-    private fun configuraAtualizaMaisUmNoCarrinho(fragment: AtualizaMaisUmNoCarrinhoFragment) {
+    private fun configuraAtualizaMaisUmNoCarrinho(fragment: CarrinhoAtualizaMaisUmFragment) {
         fragment.apply {
             quandoAtualizaMaisUm = {
                 vaiParaListaCarrinho(clienteIdLogin)
@@ -91,8 +85,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun configuraListaCarrinho(fragment: ListaCarrinhoFragment) {
-        fragment.apply {
+    private fun configuraListaCarrinho(listaFragment: CarrinhoListaFragment) {
+        listaFragment.apply {
             quandoAdicionaCarrinho = { carrinho ->
                 preparaAtualizacaoCarrinho(carrinho, ADICIONA_NO_CARRINHO)
             }
@@ -115,7 +109,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun configuraAdicionaNoCarrinho(fragment: AdicionaNoCarrinhoFragment) {
+    private fun configuraAdicionaNoCarrinho(fragment: CarrinhoAdicionaProdutosFragment) {
         fragment.apply {
             quandoSalvaCarrinho = {
             vaiParaListaCarrinho(clienteIdLogin)
@@ -124,7 +118,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun configuraDetalheDoProduto(fragment: DetalhesProdutoFragment) {
+    private fun configuraDetalheDoProduto(fragment: ProdutoDetalhesFragment) {
         fragment.apply {
             quandoProdutoAdiciona = ::irParaAdicionaNoCarrinhoFragment
             quandoDetalheProdutoFab = {
@@ -140,15 +134,15 @@ class MainActivity : AppCompatActivity() {
     private fun configuraListaProdutos(fragment: ListaProdutosFragment) {
         fragment.apply {
             quandoProdutoSelecionado = { produtoSelecionado ->
-                val detalhesProdutoFragment: DetalhesProdutoFragment by inject()
+                val produtoDetalhesFragment: ProdutoDetalhesFragment by inject()
                 val argumentos = bundleOf(
                     CHAVE_CLIENTE_ARGS to clienteIdLogin,
                     CHAVE_PRODUTO_ID_ARGS to produtoSelecionado.id
                 )
-                detalhesProdutoFragment.arguments = argumentos
+                produtoDetalhesFragment.arguments = argumentos
                 transacaoFragment {
                     addToBackStack("R.id.produtos")
-                    replace(R.id.container, detalhesProdutoFragment)
+                    replace(R.id.container, produtoDetalhesFragment)
                 }
             }
             quandoProdutoFab = {
@@ -161,7 +155,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun configuraListaCategoria(fragment: ListaCategoriasFragment) {
+    private fun configuraListaCategoria(fragment: CategoriaListaFragment) {
         fragment.apply {
             quandoCategoriaSelecionado = { categoriaSelecionado ->
                 irParaListaProdutos(categoriaSelecionado)
@@ -173,18 +167,23 @@ class MainActivity : AppCompatActivity() {
                 vaiPara(MainActivityNavigationDrawer::class.java) { finish() }
             }
             quandoClienteNaoLogado = ::vaiParaLogin
-            quandoClienteSaiDoApp = ::vaiParaLogin
+            quandoClienteSaiDoApp = {
+                vaiParaLogin()
+            }
         }
     }
 
     fun vaiParaListaCategoria(clienteIdLogin: Long) {
-        val listaCategoriasFragment: ListaCategoriasFragment by inject()
+        val listaCategoriasFragment: CategoriaListaFragment by inject()
         val argumentos = bundleOf(
             CHAVE_CLIENTE_ARGS to clienteIdLogin
         )
         listaCategoriasFragment.arguments = argumentos
         transacaoFragment {
-            addToBackStack("R.id.categoria")
+            supportFragmentManager.popBackStack()
+            supportFragmentManager.popBackStack()
+            supportFragmentManager.popBackStack()
+            //addToBackStack("R.id.categoria")
             replace(R.id.container, listaCategoriasFragment)
         }
     }
@@ -203,60 +202,71 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun vaiParaListaCarrinho(clienteIdLogin: Long) {
-        val listaCarrinhoFragment: ListaCarrinhoFragment by inject()
+        val carrinhoListaFragment: CarrinhoListaFragment by inject()
         val argumentos = bundleOf(CHAVE_CLIENTE_ARGS to clienteIdLogin)
-        listaCarrinhoFragment.arguments = argumentos
+        carrinhoListaFragment.arguments = argumentos
         transacaoFragment {
-            supportFragmentManager.popBackStack(R.id.produtos, 0)
-            replace(R.id.container, listaCarrinhoFragment)
+            //supportFragmentManager.popBackStack(R.id.categorias, 0)
+            supportFragmentManager.popBackStack()
+            supportFragmentManager.popBackStack()
+            replace(R.id.container, carrinhoListaFragment)
         }
     }
 
     private fun irParaAdicionaNoCarrinhoFragment(produtoAdicionado: Produto) {
-        val adicionaNoCarrinhoFragment: AdicionaNoCarrinhoFragment by inject()
+        val carrinhoAdicionaProdutosFragment: CarrinhoAdicionaProdutosFragment by inject()
         val argumentos = bundleOf(
             CHAVE_CLIENTE_ARGS to clienteIdLogin,
             CHAVE_PRODUTO_ARGS to produtoAdicionado
         )
-        adicionaNoCarrinhoFragment.arguments = argumentos
+        carrinhoAdicionaProdutosFragment.arguments = argumentos
         transacaoFragment {
-            replace(R.id.container, adicionaNoCarrinhoFragment)
+            replace(R.id.container, carrinhoAdicionaProdutosFragment)
         }
     }
 
     fun preparaAtualizacaoCarrinho(carrinho: Carrinho, tipoOperacao: String) {
         val carrinhoOper = CarrinhoOper(carrinhoOper = carrinho, tipoOper = tipoOperacao)
-        val atualizaMaisUmNoCarrinhoFragment: AtualizaMaisUmNoCarrinhoFragment by inject()
+        val carrinhoAtualizaMaisUmFragment: CarrinhoAtualizaMaisUmFragment by inject()
         val argumentos = bundleOf(
             CHAVE_CLIENTE_ARGS to clienteIdLogin,
             CHAVE_CARRINHO_OPER to carrinhoOper
         )
-        atualizaMaisUmNoCarrinhoFragment.arguments = argumentos
+        carrinhoAtualizaMaisUmFragment.arguments = argumentos
         transacaoFragment {
-            replace(R.id.container, atualizaMaisUmNoCarrinhoFragment)
+            replace(R.id.container, carrinhoAtualizaMaisUmFragment)
         }
     }
 
     fun vaiParaLogin() {
-//        val prefs = getSharedPreferences(FILE_PREFERENCE, Context.MODE_PRIVATE)
-//        prefs.edit().remove(CHAVE_LOGIN_CLIENTE).commit();
         viewModelLogin.removeIdDoCliente()
-        Log.i("TAG", "vaiParaLogin: Logim removido ")
         vaiPara(LoginActivity::class.java) {
+            Log.i("TAG", "vaiParaLogin: popBack")
+//            supportFragmentManager.popBackStack("R.id.login",0)
+//            val fm: FragmentManager = supportFragmentManager
+//            val count: Int = fm.getBackStackEntryCount()
+//            Log.i("TAG", "vaiParaLogin: getBackStack count = $count" )
+//            for (i in 0 until count) {
+//                fm.popBackStackImmediate()
+//                Log.i("TAG", "fez popBackStack count = $count" )
+//            }
+            supportFragmentManager.popBackStack()
+            supportFragmentManager.popBackStack()
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             finish()
         }
     }
+    private fun tentaCarregarDestino(): String? {
+        val destino = intent.getStringExtra(CHAVE_DESTINO)
+        return destino
+    }
 
+}
+//        val prefs = getSharedPreferences(FILE_PREFERENCE, Context.MODE_PRIVATE)
+//        prefs.edit().remove(CHAVE_LOGIN_CLIENTE).commit();
 //    fun buscaLoginDoCliente(): Long {
 //        val sp = getSharedPreferences(FILE_PREFERENCE, MODE_PRIVATE)
 //        val clienteIdLogin: Long = sp.getLong(CHAVE_LOGIN_CLIENTE, -1)
 //        return preferences.getLong(CHAVE_LOGIN_CLIENTE,-1)
 //        return clienteIdLogin
 //    }
-
-    private fun tentaCarregarDestino(): String? {
-        val destino = intent.getStringExtra(CHAVE_DESTINO)
-        return destino
-    }
-}

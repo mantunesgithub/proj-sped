@@ -3,6 +3,7 @@ package br.com.mantunes.sped.ui.fragment
 import android.os.Bundle
 import android.view.*
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import br.com.mantunes.sped.R
@@ -16,7 +17,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 private const val MENSAGEM_FALHA_CARREGAR_CATEGORIAS =
         "Não foi possível carregar as novas categorias"
 
-class ListaCategoriasFragment : ClienteBaseLogadoFragment() {
+class CategoriaListaFragment : ClienteBaseLogadoFragment() {
 
     private val viewModel: CategoriaViewModel by viewModel()
     private val adapter: CategoriaAdapter by inject()
@@ -72,6 +73,7 @@ class ListaCategoriasFragment : ClienteBaseLogadoFragment() {
         val divisor = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
         lista_categoria_recyclerview.addItemDecoration(divisor)
         lista_categoria_recyclerview.adapter = adapter
+
         adapter.onItemClickListener = {
             quandoCategoriaSelecionado(it)
         }

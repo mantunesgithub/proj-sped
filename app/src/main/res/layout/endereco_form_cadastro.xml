@@ -1,148 +1,200 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
         <TextView
             android:id="@+id/endereco_form_cadastro_tipo_txv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
             android:layout_margin="16dp"
-            android:text="Tipo de endereço:"
+            android:text="Tipo de endereço"
             android:textSize="20sp"
-            android:textStyle="normal" />
-
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"/>
         <Spinner
             android:id="@+id/endereco_form_cadastro_spinner_tipo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="24sp"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/endereco_form_cadastro_tipo_txv"/>
 
         <Button
             android:id="@+id/endereco_form_btn_viacep"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@android:color/white"
+            android:shadowRadius="5"
             android:text="@string/endereco_viacep"
-            android:backgroundTint="@android:color/transparent"
-            android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
-            android:textAlignment="textStart"
-            android:layout_margin="8dp"   />
-
+            android:textAllCaps="false"
+            android:textColor="#28BF79"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            app:layout_constraintTop_toBottomOf="@id/endereco_form_cadastro_spinner_tipo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:strokeColor="@color/design_default_color_on_secondary"
+            app:strokeWidth="1dp" />
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:id="@+id/endereco_form_cadastro_cep_txi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/endereco_form_btn_viacep">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/endereco_form_cadastro_cep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:hint="@string/cep" />
+                android:hint="Cep"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:id="@+id/endereco_form_cadastro_endereco_txi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/endereco_form_cadastro_cep_txi">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/endereco_form_cadastro_endereco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:hint="@string/endereco" />
+                android:hint="@string/endereco"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:id="@+id/endereco_form_cadastro_numero_txi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/endereco_form_cadastro_endereco_txi">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/endereco_form_cadastro_numero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:hint="@string/endereco_numero" />
+                android:hint="@string/endereco_numero"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:id="@+id/endereco_form_cadastro_complemento_txi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/endereco_form_cadastro_numero_txi">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/endereco_form_cadastro_complemento"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:hint="@string/complemento" />
+                android:hint="@string/complemento"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:id="@+id/endereco_form_cadastro_bairro_txi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/endereco_form_cadastro_complemento_txi">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/endereco_form_cadastro_bairro"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:hint="@string/bairro" />
+                android:hint="@string/bairro"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:id="@+id/endereco_form_cadastro_cidade_txi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/endereco_form_cadastro_bairro_txi">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/endereco_form_cadastro_cidade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:hint="@string/cidade" />
+                android:hint="@string/cidade"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:id="@+id/endereco_form_cadastro_estado_txi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/endereco_form_cadastro_cidade_txi">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/endereco_form_cadastro_estado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:hint="@string/estado" />
+                android:hint="@string/estado"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
+            android:id="@+id/endereco_form_cadastro_pais_txi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/endereco_form_cadastro_estado_txi">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/endereco_form_cadastro_pais"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:hint="@string/pais" />
+                android:hint="@string/pais"
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/endereco_form_cadastro_btn_salvar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/colorPrimary"
             android:text="@string/salvar"
-            android:layout_margin="8dp"   />
-    </LinearLayout>
+            android:textColor="@color/design_default_color_background"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/endereco_form_cadastro_pais_txi"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

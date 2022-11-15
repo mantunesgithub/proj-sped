@@ -28,7 +28,6 @@
         android:layout_gravity="start"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Total: R$ 1.200,00"
         android:textSize="20sp"
         android:textStyle="bold"
         />

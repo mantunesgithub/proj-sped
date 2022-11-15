@@ -11,7 +11,7 @@ import br.com.mantunes.sped.model.enum.TIPO_PAGAMENTO
 import br.com.mantunes.sped.ui.fragment.extensions.mostraMsg
 import kotlinx.android.synthetic.main.forma_pagamento.*
 
-class FormaPagamentoFragment : ClienteBaseLogadoFragment() {
+class PagamentoFormasFragment : ClienteBaseLogadoFragment() {
     var quandoSelecionaPagamento: (pedidoDTO: PedidoDTO?) -> Unit = {}
 
     override fun onCreateView(

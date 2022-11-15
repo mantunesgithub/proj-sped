@@ -10,7 +10,7 @@ import br.com.mantunes.sped.ui.viewmodel.CarrinhoViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class AtualizaMaisUmNoCarrinhoFragment : ClienteBaseLogadoFragment() {
+class CarrinhoAtualizaMaisUmFragment : ClienteBaseLogadoFragment() {
 
     private val viewModel: CarrinhoViewModel by viewModel { parametersOf(clienteIdLogado) }
     var quandoAtualizaMaisUm: (idCarrinho: Long) -> Unit = {}

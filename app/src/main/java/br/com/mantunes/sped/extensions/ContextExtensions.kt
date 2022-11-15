@@ -19,6 +19,6 @@ fun Context.toast(mensagem: String) {
     Toast.makeText(
         this,
         mensagem,
-        Toast.LENGTH_SHORT
+        Toast.LENGTH_LONG
     ).show()
 }

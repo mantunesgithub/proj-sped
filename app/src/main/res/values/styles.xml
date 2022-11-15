@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
 <!--        <item name="windowNoTitle">true</item>-->
     </style>
+    <style name="ErrorTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">#012803</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold|italic</item>
+    </style>
 
     <style name="AppTheme.NoActionBar">
 <!--        <item name="windowActionBar">false</item>-->
@@ -15,4 +20,5 @@
     </style>
     <style name="Theme.ProjmaSped1.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.ProjmaSped1NavigationDawer.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
