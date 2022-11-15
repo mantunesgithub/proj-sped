@@ -40,10 +40,12 @@ val testeDatabaseModule = module {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
                     CoroutineScope(IO).launch {
+
                         val daoCategoria : CategoriaDAO by inject ()
                         val listaCategorias: List<Categoria> = criaCategorias()
                         daoCategoria.salva(listaCategorias)
                         Log.i("TAG", "onCreate: Salvou cate $listaCategorias")
+
                         val daoProduto : ProdutoDAO by inject ()
                         val listaProdutos: List<Produto> = criaProdutos()
                         daoProduto.salva(listaProdutos)
