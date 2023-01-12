@@ -2,6 +2,8 @@ package br.com.mantunes.sped
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
+import br.com.mantunes.sped.ui.fragment.LoginFragment
+import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -96,7 +96,7 @@ class LoginFragment : Fragment() {
         }
         return error
     }
-    fun isValidString(str: String): Boolean{
+     fun isValidString(str: String): Boolean{
         return android.util.Patterns.EMAIL_ADDRESS.matcher(str).matches()
     }
 }

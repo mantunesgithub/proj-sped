@@ -2,14 +2,12 @@ package br.com.mantunes.sped.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.extensions.vaiPara
-import br.com.mantunes.sped.ui.fragment.*
+import br.com.mantunes.sped.ui.fragment.ClienteCadastroInicialFragment
+import br.com.mantunes.sped.ui.fragment.LoginFragment
 import org.koin.android.ext.android.inject
 
 class LoginActivity : AppCompatActivity() {
@@ -20,7 +18,6 @@ class LoginActivity : AppCompatActivity() {
 
         if (savedInstanceState == null) {
             val loginFragment: LoginFragment by inject()
-            Log.i("TAG", "onCreate: Login passou savedInstance ")
             transacaoFragment {
                 //addToBackStack("R.id.login")
                 replace(R.id.login_container, loginFragment)
