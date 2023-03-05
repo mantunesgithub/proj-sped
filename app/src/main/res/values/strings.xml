@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Speed</string>
+    <string name="app_name">Sped</string>
     <string name="chave_pix">Chave Pix</string>
-    <string name="comprar">ADICIONAR AO CARRINHO</string>
+    <string name="comprar">Adicionar ao carrinho</string>
     <string name="data_de_validade">Data de validade</string>
     <string name="numero_cartao">Número cartão</string>
     <string name="numero_cpf_cnpj">cpf/cnpj</string>
@@ -12,7 +12,7 @@
     <string name="numero_cvc">Código segurança</string>
     <string name="quantidade">2</string>
     <string name="confirmar_pagamento">Confirmar pagamento</string>
-    <string name="txv_inicio">Sped - Sistema de Pedidos</string>
+    <string name="txv_inicio">Sped-Sistema de Pedidos</string>
     <string name="txv_endereco">Endereços de Entrega</string>
     <string name="txv_perfil">Perfil PF</string>
     <string name="txv_login">Login</string>
@@ -30,7 +30,7 @@
     <string name="cep">Cep</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Sped - Sistema de pedidos</string>
+    <string name="nav_header_title">Sped-Sistema de pedidos</string>
     <string name="nav_header_subtitle">sped@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
@@ -42,7 +42,7 @@
     <string name="salvar">Salvar</string>
 
     <string name="ir_comprar">Vamos às Compras</string>
-    <string name="promocao_do_dia">Promoções do Dia!</string>
+    <string name="promocao_do_dia">Promoções do dia!</string>
     <string name="footer">Mais Promoções ...</string>
     <string name="categoria">Esportes e Informática</string>
     <string name="comidas">Comidas</string>
@@ -65,5 +65,17 @@
     <string name="pessoa_fisica">PF</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dialog_start_game">Inicio do dialog</string>
+    <string name="cancel">Cancele</string>
+    <string name="startar">Start</string>
+    <string name="tirar_foto">Tirar uma foto</string>
+    <string name="pegar_galeria">Pegar da galeria</string>
+    <string name="foto">foto</string>
+    <string name="galeria">galeria</string>
+    <string name="sair">sair</string>
+    <string name="button_positive_foto">\FOTO        \</string>
+    <string name="button_negative_galeria">\GALERIA         \</string>
+    <string name="button_neutral_sair">SAIR</string>
+    <string name="create_file_error"><![CDATA["   <string name=\"create_file_error\">Error occurred creating file: %1$s</string>"]]></string>
 
 </resources>

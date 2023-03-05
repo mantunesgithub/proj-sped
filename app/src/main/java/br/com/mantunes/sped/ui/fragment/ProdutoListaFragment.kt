@@ -1,6 +1,7 @@
 package br.com.mantunes.sped.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.LinearLayout.VERTICAL
 import androidx.lifecycle.Observer
@@ -50,7 +51,8 @@ class ListaProdutosFragment : ClienteBaseLogadoFragment() {
             observe(this, Observer { resource->
             resource.dado?.let { adapter.atualiza(it) }
             resource.erro?.let {
-                mostraMsg(MENSAGEM_FALHA_CARREGAR_PRODUTOS)
+//                mostraMsg(MENSAGEM_FALHA_CARREGAR_PRODUTOS)
+                Log.i("acertar", "buscaProdutos: $MENSAGEM_FALHA_CARREGAR_PRODUTOS ")
             }
         })
     }

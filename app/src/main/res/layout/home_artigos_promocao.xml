@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:text="@string/categoria"
         android:textSize="24dp"
+        android:fontFamily="@font/montserrat_bold"
         android:gravity="center"
         android:layout_marginBottom="16dp"/>
     <LinearLayout
@@ -21,12 +22,14 @@
             android:layout_height="wrap_content"
             android:text="@string/camisa"
             android:layout_marginStart="8dp"
+            android:fontFamily="@font/montserrat"
             android:textSize="18dp"
             android:layout_weight="1"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:fontFamily="@font/montserrat"
             android:text="@string/preco_80"
             android:textSize="18dp"
             android:gravity="end"
@@ -42,11 +45,13 @@
             android:text="@string/chuteira_futebol"
             android:layout_marginStart="8dp"
             android:textSize="18dp"
+            android:fontFamily="@font/montserrat"
             android:layout_weight="1"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/preco_120"
+            android:fontFamily="@font/montserrat"
             android:layout_marginEnd="8dp"
             android:textSize="18dp"
             android:gravity="end"
@@ -60,6 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/meiao"
+            android:fontFamily="@font/montserrat"
             android:layout_marginStart="8dp"
             android:textSize="18dp"
             android:layout_weight="1"/>
@@ -67,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/preco_60"
+            android:fontFamily="@font/montserrat"
             android:layout_marginEnd="8dp"
             android:textSize="18dp"
             android:gravity="end"
@@ -80,6 +87,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/teclado"
+            android:fontFamily="@font/montserrat"
             android:layout_marginStart="8dp"
             android:textSize="18dp"
             android:layout_weight="1"/>
@@ -87,6 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/preco_100"
+            android:fontFamily="@font/montserrat"
             android:textSize="18dp"
             android:layout_marginEnd="8dp"
             android:gravity="end"
@@ -100,6 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/mouse"
+            android:fontFamily="@font/montserrat"
             android:layout_marginStart="8dp"
             android:textSize="18dp"
             android:layout_weight="1"/>
@@ -107,6 +117,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/preco_60"
+            android:fontFamily="@font/montserrat"
             android:layout_marginEnd="8dp"
             android:textSize="18dp"
             android:gravity="end"

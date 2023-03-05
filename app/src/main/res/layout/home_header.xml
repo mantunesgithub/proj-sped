@@ -16,9 +16,9 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
         android:text="@string/promocao_do_dia"
-        android:textStyle="italic|bold"
-        android:textSize="25dp"
+        android:textSize="24dp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/ivLogo"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

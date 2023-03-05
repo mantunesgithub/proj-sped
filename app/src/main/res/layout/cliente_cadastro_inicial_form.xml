@@ -26,6 +26,8 @@
                 android:id="@+id/formulario_cadastro_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp"
                 android:hint="Nome"
                 android:importantForAutofill="no"
                 android:inputType="textCapWords"
@@ -48,6 +50,8 @@
                 android:id="@+id/formulario_cadastro_tipoPessoa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp"
                 android:hint="Tipo pessoa : PF / PJ"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -68,6 +72,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Cpf / Cnpj"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,6 +92,8 @@
                 android:id="@+id/formulario_cadastro_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp"
                 android:hint="Email"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -106,6 +114,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Senha"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp"
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -116,9 +126,9 @@
             android:layout_marginTop="16dp"
             android:text="Cadastrar"
             android:textAllCaps="false"
-            android:backgroundTint="#28BF79"
+            android:backgroundTint="@color/colorPrimary"
             android:textSize="20sp"
-            android:textStyle="bold|italic"
+            android:fontFamily="@font/montserrat_bold"
             android:clickable="true"
             android:focusable="true"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -10,9 +10,10 @@ class CEP {
     var unidade: String? = ""
     var ibge: String? = ""
     var gia: String? = ""
+    var pais: String? = "Brasil"
 
     override fun toString(): String {
         return "cep $cep logradouro $logradouro complemento $complemento bairro" +
-               " $bairro localidade $localidade uf $uf unidade $unidade ibge $ibge gia $gia"
+               " $bairro localidade $localidade uf $uf unidade $unidade ibge $ibge gia $gia pais $pais"
     }
 }

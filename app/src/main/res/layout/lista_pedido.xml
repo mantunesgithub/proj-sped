@@ -19,6 +19,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textSize="24sp"
+            android:fontFamily="@font/montserrat_bold"
             android:textStyle="bold"
             android:text="Itens do pedido"/>
 
@@ -43,7 +44,7 @@
         android:layout_marginBottom="34dp"
         android:text="Total:                                     R$ 1.200,00"
         android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:fontFamily="@font/montserrat_bold"/>
 
         <Space
             android:layout_width="match_parent"
@@ -64,11 +65,11 @@
                 android:id="@+id/lista_pedido_cliente_txv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="10dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textSize="24sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_bold"
                 android:text="Cliente"/>
             <TextView
                 android:id="@+id/lista_pedido_nome"
@@ -79,8 +80,8 @@
                 android:layout_marginEnd="16dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textSize="20sp"
-                android:textStyle="bold"
+                android:textSize="18sp"
+                android:fontFamily="@font/montserrat_bold"
                 tools:text="@tools:sample/lorem/random" />
             <TextView
                 android:id="@+id/lista_pedido_email"
@@ -92,7 +93,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textSize="18sp"
-                android:textStyle="normal"
+                android:fontFamily="@font/montserrat"
                 tools:text="mariass@gmai.com"/>
         </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
@@ -113,6 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:ellipsize="end"
+                android:fontFamily="@font/montserrat_bold"
                 android:maxLines="1"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -121,7 +123,7 @@
                 android:id="@+id/lista_pedido_logradouro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:ellipsize="end"
@@ -170,11 +172,11 @@
                     android:id="@+id/lista_pedido_pagamento_txv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:layout_margin="10dp"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textSize="24sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_bold"
                     android:text="Pagamento"/>
                 <TextView
                     android:id="@+id/lista_pedido_tipo_pagamento"
@@ -208,24 +210,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="#EF6095"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="24dp"
-            android:text="CONFIRMAR PEDIDO" />
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="20sp"
+            android:text="Confirmar pedido" />
 
         <Button
             android:id="@+id/lista_pedido_botao_voltar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/transparent"
+            android:background="@drawable/botao_customizado"
             android:textColor="@color/colorPrimary"
-            android:textStyle="bold"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
-            android:text="VOLTAR"/>
+            android:fontFamily="@font/montserrat_bold"
+            android:textSize="21sp"
+            android:text="Voltar"/>
         </LinearLayout>
 </ScrollView>

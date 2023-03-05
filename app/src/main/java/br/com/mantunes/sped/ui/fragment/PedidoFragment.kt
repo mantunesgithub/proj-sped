@@ -69,7 +69,7 @@ class PedidoFragment : ClienteBaseLogadoFragment() {
         lista_pedido_recyclerView.adapter = adapter
     }
     private fun buscaCarrinhoComItensPedido() {
-        viewModel.buscaTodos(clienteIdLogado).observe(this,
+        viewModel.buscaTodos(clienteIdLogado).observe(viewLifecycleOwner,
             Observer { carrinhoEncontrado ->
                 carrinhoEncontrado?.let { listaCarrinhoDoCliente ->
                     adapter.atualiza(listaCarrinhoDoCliente)

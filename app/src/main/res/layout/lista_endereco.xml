@@ -12,12 +12,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:layout_margin="16dp"
-        android:text="Selecione um endereco"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Selecione um endereço"
         android:textSize="24sp"
         android:textStyle="normal" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="16dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/lista_endereco_recyclerview"

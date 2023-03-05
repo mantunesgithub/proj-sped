@@ -77,7 +77,7 @@ class EnderecoFormCadastroFragment : Fragment() {
     private fun configuraBotaoSalvar() {
         _binding.enderecoFormCadastroBtnSalvar.setOnClickListener {
             clienteLogado?.let { clienteLogado ->
-                Log.i("TAG", "criaEndereco: id logado = $it")
+                Log.i("TAG", "criaEndereco: id logado = $clienteLogado")
                 criaEndereco(clienteLogado)?.let(this::salva) ?: mostraMsg(
                     getString(R.string.falha_ao_criar_endereco)
                 )
@@ -222,7 +222,7 @@ class EnderecoFormCadastroFragment : Fragment() {
                 dialog, which ->
 // Here you get get input text from the Edittext
             var cepDigitado = input.text.toString()
-            mostraMsg("Cep = $cepDigitado")
+//            mostraMsg("Cep = $cepDigitado")
             viewModelEnderecoViacep.buscaEnderecoPorCep(cepDigitado).observe(viewLifecycleOwner,
                 Observer { resource->
                     resource?.dado?.let {
@@ -244,5 +244,6 @@ class EnderecoFormCadastroFragment : Fragment() {
         _binding.enderecoFormCadastroCidade.setText(it.localidade)
         _binding.enderecoFormCadastroEstado.setText(it.uf)
         _binding.enderecoFormCadastroCep.setText(it.cep)
+        _binding.enderecoFormCadastroPais.setText(it.pais)
     }
 }

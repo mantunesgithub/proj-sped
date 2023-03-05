@@ -45,6 +45,7 @@ class ProdutoRepository(
         webClient.buscaTodas(categoriaId ,
             quandoSucesso = { produtosNovos ->
                 produtosNovos?.let {
+                    println("Lista produtos novos ==  $produtosNovos")
                     adicionaCategoria(produtosNovos, categoriaId)
                     salvaInterno(produtosNovos)
                 }

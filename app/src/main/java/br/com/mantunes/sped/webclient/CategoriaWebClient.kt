@@ -1,5 +1,6 @@
 package br.com.mantunes.sped.webclient
 
+import android.util.Log
 import br.com.mantunes.sped.model.Categoria
 import br.com.mantunes.sped.webclient.services.CategoriaService
 import retrofit2.Call
@@ -18,16 +19,21 @@ class CategoriaWebClient(
         quandoSucesso: (categoriasNovas: T?) -> Unit,
         quandoFalha: (erro: String?) -> Unit
     ) {
+        Log.i("PWC", "executaRequisicaoCategoria: antes call")
         call.enqueue(object : Callback<T> {
             override fun onResponse(call: Call<T>, response: Response<T>) {
+                Log.i("PWC", "executaRequisicaoCategoria: onresponse")
                 if (response.isSuccessful) {
+                    Log.i("PWC", "executaRequisicaoCategoria: reqok")
                     quandoSucesso(response.body())
                 } else {
+                    Log.i("PWC", "executaRequisicaoCategoria: reqnaook")
                     quandoFalha(REQUISICAO_NAO_SUCEDIDA)
                 }
             }
 
             override fun onFailure(call: Call<T>, t: Throwable) {
+                    Log.i("PWC", "executaRequisicaoCategoria: onfalha")
                 quandoFalha(t.message)
             }
         })

@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sped"
+            android:fontFamily="@font/montserrat_bold"
             android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +42,7 @@
             android:text="Sistema de Pedidos"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:fontFamily="@font/montserrat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/login_sistema" />
@@ -54,8 +56,8 @@
             android:text="Já é cadastrado, digite Email/Senha"
             android:textAlignment="textEnd"
             android:textAllCaps="false"
+            android:fontFamily="@font/montserrat"
             android:textSize="16sp"
-            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.91"
             app:layout_constraintStart_toStartOf="parent"
@@ -79,7 +81,9 @@
                 android:id="@+id/login_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
                 android:hint="Email"
+                android:textSize="16sp"
                 android:inputType="textWebEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -91,16 +95,20 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             app:errorTextAppearance="@style/ErrorTextAppearance"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/login_email_txtinplay">
+            app:layout_constraintTop_toBottomOf="@id/login_email_txtinplay"
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/login_senha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat"
+                android:textSize="16sp"
                 android:hint="Senha"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -108,52 +116,56 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:backgroundTint="#28BF79"
+            android:backgroundTint="@color/colorPrimary"
             android:text="Entrar"
             android:textAllCaps="false"
             android:textColor="@color/design_default_color_on_primary"
-            android:textSize="20sp"
-            android:textStyle="bold|italic"
-            app:layout_constraintEnd_toEndOf="@id/login_senha_txtinplay"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="8dp"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/login_senha_txtinplay"
-            app:layout_constraintTop_toBottomOf="@id/login_senha_txtinplay" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_senha_txtinplay"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/login_nao_cadastrado_txv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="75dp"
-            android:text="Não possui cadastro?"
+            android:layout_marginTop="55dp"
+            android:fontFamily="@font/montserrat"
+            android:text="Não possui cadastro ? "
             android:textAllCaps="false"
             android:textSize="16sp"
-            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="@id/login_entrar_btn"
-            app:layout_constraintHorizontal_bias="0.942"
-            app:layout_constraintBottom_toTopOf="@id/login_cadastrar_btn"
+            app:layout_constraintHorizontal_bias="0.96"
             app:layout_constraintStart_toStartOf="@id/login_entrar_btn"
-            app:layout_constraintTop_toBottomOf="@id/login_entrar_btn" />
+            app:layout_constraintTop_toBottomOf="@id/login_entrar_btn"
+            app:layout_constraintBottom_toTopOf="@id/login_cadastrar_btn"
+            app:layout_constraintVertical_bias="0.42000002" />
 
         <Button
             android:id="@+id/login_cadastrar_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:layout_marginTop="4dp"
-            android:backgroundTint="@color/design_default_color_on_primary"
+            android:background="@drawable/botao_customizado"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Cadastre-se"
             android:textAllCaps="false"
-            android:textColor="#28BF79"
-            android:textSize="20sp"
-            android:textStyle="bold|italic"
-            app:strokeColor="#A29F9F"
-            app:strokeWidth="1dp"
-            android:shadowRadius="3"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/login_entrar_btn"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/login_entrar_btn"
-            app:layout_constraintTop_toBottomOf="@id/login_entrar_btn"
-            app:layout_constraintVertical_bias="0.45" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/login_senha_txtinplay"
+            app:layout_constraintVertical_bias="0.64"
+            app:strokeColor="#A29F9F"
+            app:strokeWidth="1dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

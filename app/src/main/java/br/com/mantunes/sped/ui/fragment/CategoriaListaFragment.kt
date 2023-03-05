@@ -1,6 +1,7 @@
 package br.com.mantunes.sped.ui.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -90,7 +91,8 @@ class CategoriaListaFragment : ClienteBaseLogadoFragment() {
             resource.dado?.let {
                         adapter.atualiza(it) }
             resource.erro?.let {
-                        mostraMsg(MENSAGEM_FALHA_CARREGAR_CATEGORIAS)
+                        //mostraMsg(MENSAGEM_FALHA_CARREGAR_CATEGORIAS)
+                Log.i("acerto", "buscaCategoria: $MENSAGEM_FALHA_CARREGAR_CATEGORIAS)")
             }
         })
     }

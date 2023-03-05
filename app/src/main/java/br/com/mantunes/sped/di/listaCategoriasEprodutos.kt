@@ -17,6 +17,24 @@ fun criaCategorias(): List<Categoria> {
             nome = "Informática",
             descricao = "Material de informatica",
             imagem = "https://images.pexels.com/photos/8721342/pexels-photo-8721342.jpeg?auto=compress&cs=tinysrgb&w=600"
+        ),
+        Categoria(
+            id = 0,
+            nome = "Escritorio",
+            descricao = "Materias de escritorio em geral",
+            imagem = "https://images.pexels.com/photos/1957477/pexels-photo-1957477.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        ),
+        Categoria(
+            id = 0,
+            nome = "Jardinagem",
+            descricao = "Materias de jardim em geral",
+            imagem = "https://images.pexels.com/photos/2013782/pexels-photo-2013782.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        ),
+        Categoria(
+            id = 0,
+            nome = "Decoração",
+            descricao = "Materias de decoração",
+            imagem = "https://images.pexels.com/photos/13871100/pexels-photo-13871100.jpeg?auto=compress&cs=tinysrgb&w=1600"
         )
     )
     return listaCategorias
@@ -25,7 +43,7 @@ fun criaProdutos(): List<Produto> {
     val listaProdutos: List<Produto> = listOf(
         Produto(
             id = 0,
-            nome = "Bola de Futebol da Alemanha - Nº.5 - Futebol e Magia",
+            nome = "Bola de Futebol da Alemanha Nº.5",
             descricao = "Desenvolvido para chutes precisos e voos excelentes durante as partidas ou treinos. Ela possui 32 gomos costurados e traz revestimento externo em PVC, além de apresentar um design moderno que enaltece o escudo da equipe. Material em PVC, Medidas: 68 cm de circunferência, Peso: 320 gramas.Idade Recomendada: A partir de 04 anos de idade.Contém: 01 - Bola de Futebol de Campo No 5.",
             imagem = "https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg?auto=compress&cs=tinysrgb&w=600",
             preco = BigDecimal("100.00"),
@@ -70,6 +88,38 @@ fun criaProdutos(): List<Produto> {
             imagem = "https://images.pexels.com/photos/1029757/pexels-photo-1029757.jpeg?auto=compress&cs=tinysrgb&w=600",
             preco = BigDecimal("600.00"),
             categoriaId = 2L
+        ),
+        Produto(
+            id = 0,
+            nome = "Mesa de escritório",
+            descricao = "Mesa de madeira para trabalho",
+            imagem = "https://images.pexels.com/photos/8960464/pexels-photo-8960464.jpeg?auto=compress&cs=tinysrgb&w=1600",
+            preco = BigDecimal("400.00"),
+            categoriaId = 3L
+        ),
+        Produto(
+            id = 0,
+            nome = "Balde",
+            descricao = "Balde para regar plantas",
+            imagem = "https://images.pexels.com/photos/1424672/pexels-photo-1424672.jpeg?auto=compress&cs=tinysrgb&w=1600",
+            preco = BigDecimal("60.00"),
+            categoriaId = 4L
+        ),
+        Produto(
+            id = 0,
+            nome = "Abajour",
+            descricao = "Abajur luminoso para decoração de qualquer ambiente",
+            imagem = "https://images.pexels.com/photos/1112598/pexels-photo-1112598.jpeg?auto=compress&cs=tinysrgb&w=1600",
+            preco = BigDecimal("500.00"),
+            categoriaId = 5L
+        ),
+        Produto(
+            id = 0,
+            nome = "Pendente",
+            descricao = "Pendentes luminosos para uso geral ",
+            imagem = "https://images.pexels.com/photos/5094559/pexels-photo-5094559.jpeg?auto=compress&cs=tinysrgb&w=1600",
+            preco = BigDecimal("300.00"),
+            categoriaId = 5L
         )
     )
     return listaProdutos
