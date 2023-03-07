@@ -1,8 +1,13 @@
 package br.com.mantunes.sped.ui.fragment
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import br.com.mantunes.sped.R
@@ -13,12 +18,17 @@ import kotlinx.android.synthetic.main.login.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
+
 class LoginFragment : Fragment() {
     private val clienteId: Long = 0
     private val viewModel: ClienteViewModel by viewModel { parametersOf(clienteId) }
     private val viewModelLogin: LoginViewModel by viewModel()
     var quandoAutenticaOk: ()-> Unit = {}
     var quandoCadastroInicial: ()-> Unit = {}
+    private val contextVaiPara by lazy {
+        requireContext().applicationContext
+            ?: throw IllegalArgumentException(PROBLEMA_EXTRAIR_CONTEXTO)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,8 +44,25 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        setHasOptionsMenu(true)
+        configuraTeclado()
         configuraBotaoCadastrar()
         configuraBotaoEntrar()
+    }
+
+    private fun configuraTeclado() {
+        login_email.setOnFocusChangeListener(OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                (contextVaiPara!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
+                    login_email.windowToken, 0
+                )
+            }
+        })
+        login_senha.setOnFocusChangeListener(OnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                (contextVaiPara!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(
+                    login_senha.windowToken, 0)
+            }
+        })
     }
 
     private fun configuraBotaoEntrar() {

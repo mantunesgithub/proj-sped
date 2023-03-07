@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.model.Endereco
 import br.com.mantunes.sped.model.PedidoDTO
+import br.com.mantunes.sped.ui.fragment.extensions.mostraMsg
 import br.com.mantunes.sped.ui.viewmodel.ClienteViewModel
 import br.com.mantunes.sped.ui.viewmodel.EnderecoViewModel
 import kotlinx.android.synthetic.main.enderecos.*
@@ -70,6 +71,10 @@ class EnderecoFragment : ClienteBaseLogadoFragment() {
     private fun buscaEnderecos() {
         viewModel.buscaTodos(clienteIdLogado).observe(viewLifecycleOwner, Observer { listaEnderecoEncontrada ->
             listaEnderecoEncontrada?.let { listaEndereco ->
+
+                if (listaEndereco.isEmpty()) {
+                    mostraMsg(" Endereço não cadastrado! Retornar p/ Home e cadastrar.")
+                }
                 enderecosDisponiveis = listaEndereco
                 endereco1_cardview.visibility = View.GONE
                 endereco2_cardview.visibility = View.GONE
@@ -99,6 +104,6 @@ class EnderecoFragment : ClienteBaseLogadoFragment() {
                     }
                 }
             }
-        })
+        } )
     }
 }

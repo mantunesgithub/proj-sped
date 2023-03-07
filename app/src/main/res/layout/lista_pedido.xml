@@ -210,27 +210,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:backgroundTint="#EF6095"
+            android:background="@drawable/bg_botao_customizado_roxo"
+            app:backgroundTint="@null"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/montserrat_bold"
-            android:textSize="20sp"
+            android:textSize="18sp"
+            android:textColor="@color/colorAccent"
             android:text="Confirmar pedido" />
 
         <Button
             android:id="@+id/lista_pedido_botao_voltar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/botao_customizado"
-            android:textColor="@color/colorPrimary"
+            android:background="@drawable/botao_customizado_branco"
+            app:backgroundTint="@null"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/montserrat_bold"
-            android:textSize="21sp"
+            android:textColor="#690CAC"
+            android:textSize="18sp"
             android:text="Voltar"/>
         </LinearLayout>
 </ScrollView>

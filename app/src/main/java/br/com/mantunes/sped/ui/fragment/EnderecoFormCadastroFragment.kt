@@ -193,7 +193,6 @@ class EnderecoFormCadastroFragment : Fragment() {
                 ) {
                     tipoEndereco = parent.getItemAtPosition(pos) as String
                 }
-
                 override fun onNothingSelected(parent: AdapterView<*>) {
                 }
             }

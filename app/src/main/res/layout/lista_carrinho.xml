@@ -25,7 +25,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:textSize="20sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/montserrat_bold"
         />
 
     <Button
@@ -33,11 +33,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:background="@drawable/botao_customizado"
+        android:background="@drawable/bg_botao_customizado_roxo"
+        app:backgroundTint="@null"
         android:fontFamily="@font/montserrat_bold"
         android:layout_gravity="start"
         android:layout_margin="16dp"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorAccent"
         android:text="Continuar comprando"/>
 
     <Button
@@ -48,9 +49,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
+        android:textColor="#690CAC"
         android:textSize="18sp"
+        android:background="@drawable/botao_customizado_branco"
+        app:backgroundTint="@null"
         android:fontFamily="@font/montserrat_bold"
-        android:backgroundTint="#EF6095"
         android:text="Finalizar pedido" />
     </LinearLayout>
 </ScrollView>

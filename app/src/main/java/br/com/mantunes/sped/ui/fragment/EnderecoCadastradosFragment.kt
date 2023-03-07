@@ -1,6 +1,7 @@
 package br.com.mantunes.sped.ui.fragment
 
 import android.os.Bundle
+import android.text.TextUtils.isEmpty
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -102,11 +103,13 @@ class EnderecoCadastradosFragment : Fragment() {
         viewModel.buscaTodos(cliente.id)
             .observe(viewLifecycleOwner, Observer { listaEnderecoEncontrada ->
                 listaEnderecoEncontrada?.let { listaEndereco ->
+
                     atingiuLimiteDeEnderecos = verificaQtdeEndereco(listaEndereco)
                     enderecosDisponiveis = listaEndereco
                     endereco1_cardview.visibility = View.GONE
                     endereco2_cardview.visibility = View.GONE
                     endereco3_cardview.visibility = View.GONE
+
                     for (endereco in listaEndereco) {
                         val indice = listaEndereco.indexOf(endereco)
                         if (indice == 0) {

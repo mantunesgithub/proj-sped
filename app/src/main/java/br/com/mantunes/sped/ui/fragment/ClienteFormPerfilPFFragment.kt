@@ -90,15 +90,9 @@ class ClienteFormPerfilPFFragment : Fragment() {
             dialog.show(childFragmentManager, dialog.tag)
             dialog.quandoEscolheFoto = {
                 when (it) {
-                    "foto" -> {
-                        abrirCamera()
-                    }
-
-                    else -> {
-                        abrirGaleria()
-                    }
+                    "foto" -> { abrirCamera() }
+                    else -> { abrirGaleria() }
                 }
-                Log.i("TAG", "abrirDialog: tipo da foto = $it ")
             }
         }
     }
@@ -368,7 +362,7 @@ class ClienteFormPerfilPFFragment : Fragment() {
                     }
                     val uri = Uri.fromFile(photoFile)
                     _binding.clienteFormCadastroPerfilPfImagem.setImageURI(uri)
-                    _binding.clienteFormCadastroPerfilPfImagem.tag = selectedPhotoPath //uri.toString()
+                    _binding.clienteFormCadastroPerfilPfImagem.tag = selectedPhotoPath
                 }
                 _binding.clienteFormCadastroPerfilPfImagem.setImageBitmap(bitmap)
                 Log.i("TAG", "Galeria tag = ${_binding.clienteFormCadastroPerfilPfImagem.tag}")

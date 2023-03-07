@@ -53,7 +53,7 @@
         android:layout_margin="8dp"
         android:textSize="18sp"
         android:fontFamily="@font/montserrat_bold"
-        android:textColor="@color/colorPrimary"
+        android:textColor="#690CAC"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/item_produto_descricao"
         app:layout_constraintStart_toEndOf="@id/item_produto_imagem"

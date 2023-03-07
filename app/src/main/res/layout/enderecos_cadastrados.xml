@@ -195,7 +195,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             app:tint="#FFFFFF"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="#690CAC"
             android:layout_margin="16dp"
             android:layout_gravity="right"
             app:srcCompat="@drawable/ic_action_add" />

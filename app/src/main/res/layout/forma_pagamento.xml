@@ -54,6 +54,8 @@
                        android:layout_height="wrap_content"
                        android:layout_margin="16dp"
                        android:fontFamily="@font/montserrat_bold"
+                       android:background="@drawable/bg_botao_customizado_roxo"
+                       app:backgroundTint="@null"
                        android:text="Próximo"
                        android:textSize="18sp"/>
         </LinearLayout>

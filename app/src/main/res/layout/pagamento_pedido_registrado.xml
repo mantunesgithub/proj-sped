@@ -40,7 +40,7 @@
                 android:layout_marginEnd="16dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Número do pedido: "/>
             <TextView
@@ -54,7 +54,7 @@
                 android:maxLines="1"
                 android:textSize="18sp"
                 android:fontFamily="@font/montserrat"
-                android:text="Verifique seu e-mail"/>
+                android:text="Pedido enviado para seu e-mail!"/>
         </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -64,9 +64,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:fontFamily="@font/montserrat_bold"
-            android:textSize="21sp"
-            android:background="@drawable/botao_customizado"
-            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:background="@drawable/bg_botao_customizado_roxo"
+            app:backgroundTint="@null"
+            android:textColor="@color/colorAccent"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"

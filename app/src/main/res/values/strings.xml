@@ -56,7 +56,7 @@
     <string name="meiao">Meião de futebol</string>
     <string name="teclado">Teclado Sansung</string>
     <string name="mouse">Mouse</string>
-    <string name="limite_de_endereco">Erro. Permitido cadastramento de até 3 endereços</string>
+    <string name="limite_de_endereco">Permitido cadastramento de até 3 endereços</string>
     <string name="falha_ao_criar_endereco">Falha ao criar endereço</string>
     <string name="endereco_salvo_com_sucesso">Endereço salvo com sucesso!</string>
     <string name="endereco_removido_ok">Endereco removido com sucesso!</string>

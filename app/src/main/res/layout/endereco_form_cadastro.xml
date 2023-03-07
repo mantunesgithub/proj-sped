@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <TextView
             android:id="@+id/endereco_form_cadastro_tipo_txv"
             android:layout_width="match_parent"
@@ -16,6 +16,7 @@
             android:layout_margin="16dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="Tipo de endereço"
+
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"/>
@@ -25,7 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="24sp"
+            android:layout_marginTop="32sp"
+            android:layout_marginBottom="32sp"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/endereco_form_cadastro_tipo_txv"/>
 
@@ -34,17 +36,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:background="@drawable/botao_customizado"
             android:text="@string/endereco_viacep"
             android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp"
+            android:textColor="#690CAC"
+            android:background="@drawable/botao_customizado_branco"
+            app:backgroundTint="@null"
+            android:textSize="18sp"
            android:fontFamily="@font/montserrat_bold"
             app:layout_constraintTop_toBottomOf="@id/endereco_form_cadastro_spinner_tipo"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:strokeColor="@color/design_default_color_on_secondary"
-            app:strokeWidth="1dp" />
+            app:layout_constraintStart_toStartOf="parent"/>
+<!--            app:strokeColor="@color/design_default_color_on_secondary"-->
+<!--            app:strokeWidth="1dp" />-->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/endereco_form_cadastro_cep_txi"
@@ -185,10 +188,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:backgroundTint="@color/colorPrimary"
             android:text="@string/salvar"
-            android:textSize="16sp"
-            android:textColor="@color/design_default_color_background"
+            android:background="@drawable/bg_botao_customizado_roxo"
+            app:backgroundTint="@null"
+            android:textSize="18sp"
+            android:textColor="@color/colorAccent"
             android:fontFamily="@font/montserrat_bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
