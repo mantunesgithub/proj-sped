@@ -23,7 +23,7 @@ fun criaPromocoes() : List <Promocao> {
         ),
         Promocao(
             "Moda Masculino",
-            R.drawable.imagem_camisas,
+            R.drawable.imagem_camisa,
             "Camiseta Masculina Básica Bluhen Nicarágua",
             "A Camiseta Masculina Básica Bluhen é confeccionada em malha na cor azul, contendo modelagem",
             "de R$ 80,00 ",

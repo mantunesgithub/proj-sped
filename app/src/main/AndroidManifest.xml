@@ -14,13 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.activity.LoginActivity"
-            />
+        <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.MainFinalizaPedidoActivity" />
         <activity android:name=".ui.activity.MainActivity" />
 
         <activity
-            android:name=".ui.activity.MainActivityNavigationDrawer"
+            android:name=".ui.activity.CarouselActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan"
             android:configChanges="orientation|screenSize"
@@ -31,6 +30,18 @@
             </intent-filter>
 
         </activity>
+<!--        <activity-->
+<!--            android:name=".ui.activity.MainActivityNavigationDrawer"-->
+<!--            android:theme="@style/AppTheme.NoActionBar"-->
+<!--            android:windowSoftInputMode="stateHidden|adjustPan"-->
+<!--            android:configChanges="orientation|screenSize"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+
+<!--        </activity>-->
         <!-- FileProvider -->
         <provider
             android:name="androidx.core.content.FileProvider"
