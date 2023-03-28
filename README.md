@@ -1,8 +1,7 @@
 #  Sped
 ## _Mobile App Android - Sistema de pedidos de compras_ 
-![login](https://user-images.githubusercontent.com/43221954/211602657-3e827fa3-24f8-4fd2-b836-31c0a0e28dad.png)
 
-
+![c7b2e28a-1ecb-42b8-b2e6-bad1ab2e0e6b](https://user-images.githubusercontent.com/43221954/228100230-85f0ad64-a6d5-42de-9770-77bbbedc6fbd.gif)
 
 O Projeto Sped é um projeto pessoal a nível didático, desenvolvido no Mobile Android. É um App de pedidos de compras que simula
 um e_comerce, onde o usuário escolhe seus produtos e adiciona no carrinho para posteriormente efetuar o pagamento.
