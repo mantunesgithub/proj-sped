@@ -2,8 +2,6 @@ package br.com.mantunes.sped.database.converter
 
 import androidx.room.TypeConverter
 import java.math.BigDecimal
-
-
 class ConversorBigDecimal {
 
     @TypeConverter

@@ -15,6 +15,7 @@ import br.com.mantunes.sped.ui.viewmodel.CategoriaViewModel
 import kotlinx.android.synthetic.main.lista_categoria.*
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
+
 private const val MENSAGEM_FALHA_CARREGAR_CATEGORIAS =
         "Não foi possível carregar as novas categorias"
 

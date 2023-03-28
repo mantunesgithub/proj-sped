@@ -1,6 +1,8 @@
 package br.com.mantunes.sped.di
 
+import br.com.mantunes.sped.R
 import br.com.mantunes.sped.model.Categoria
+import br.com.mantunes.sped.model.ProductCarousel
 import br.com.mantunes.sped.model.Produto
 import java.math.BigDecimal
 
@@ -35,8 +37,32 @@ fun criaCategorias(): List<Categoria> {
             nome = "Decoração",
             descricao = "Materias de decoração",
             imagem = "https://images.pexels.com/photos/13871100/pexels-photo-13871100.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        ),
+        Categoria(
+            id = 0,
+            nome = "Moda Jovem",
+            descricao = "Moda jovem feminina",
+            imagem = "https://images.pexels.com/photos/15787315/pexels-photo-15787315.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        ),
+        Categoria(
+            id = 0,
+            nome = "Moda Jovem",
+            descricao = "Moda jovem masculina",
+            imagem = "https://images.pexels.com/photos/15792253/pexels-photo-15792253.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        ),
+        Categoria(
+            id = 0,
+            nome = "Utensílios domésticos",
+            descricao = "Utilidades domésticas em geral",
+            imagem = "https://images.pexels.com/photos/210897/pexels-photo-210897.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        ),
+        Categoria(
+            id = 0,
+            nome = "Eletro domésticos",
+            descricao = "Eletro domésticos para a cozinha e area de serviço",
+            imagem = "https://media.istockphoto.com/id/1196974664/pt/foto/set-of-home-kitchen-appliances-in-the-room-on-the-wall-background.jpg?s=612x612&w=is&k=20&c=5B2w88vcWZhTp6ZQE7QKtVAUnKYeDVpZsJN1-ltgo0M="
         )
-    )
+        )
     return listaCategorias
 }
 fun criaProdutos(): List<Produto> {
@@ -94,7 +120,15 @@ fun criaProdutos(): List<Produto> {
             nome = "Mesa de escritório",
             descricao = "Mesa de madeira para trabalho",
             imagem = "https://images.pexels.com/photos/8960464/pexels-photo-8960464.jpeg?auto=compress&cs=tinysrgb&w=1600",
-            preco = BigDecimal("400.00"),
+            preco = BigDecimal("800.00"),
+            categoriaId = 3L
+        ),
+        Produto(
+            id = 0,
+            nome = "Cadeira de escritório",
+            descricao = "Cadeira de visita para escritorio",
+            imagem = "https://images.pexels.com/photos/8111799/pexels-photo-8111799.jpeg?auto=compress&cs=tinysrgb&w=1600",
+            preco = BigDecimal("300.00"),
             categoriaId = 3L
         ),
         Produto(
@@ -123,4 +157,15 @@ fun criaProdutos(): List<Produto> {
         )
     )
     return listaProdutos
+}
+fun criaProductCarousel(): List<ProductCarousel> {
+    val listCarousel: List<ProductCarousel> = listOf(
+        ProductCarousel(productImage = R.drawable.imagem_camisa, productName =   "Moda Jovem"),
+        ProductCarousel(productImage = R.drawable.imagem_monitor, productName =   "Eletrônicos"),
+        ProductCarousel(productImage = R.drawable.imagem_cama_mesa, productName = "Cama e Mesa "),
+        ProductCarousel(productImage = R.drawable.imagem_raquete, productName =   "Esportes"),
+        ProductCarousel(productImage = R.drawable.imagem_office, productName =    "Escritório"),
+        ProductCarousel(productImage = R.drawable.imagem_utillar, productName =   "Utilidades Lar")
+    )
+    return listCarousel
 }

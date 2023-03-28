@@ -13,8 +13,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Base64
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +22,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -35,14 +34,11 @@ import br.com.mantunes.sped.ui.viewmodel.ClienteViewModel
 import br.com.mantunes.sped.ui.viewmodel.LoginViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.nio.file.Files.createFile
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class ClienteFormPerfilPFFragment : Fragment() {
     private var selectedPhotoPath: String = ""
@@ -90,7 +86,8 @@ class ClienteFormPerfilPFFragment : Fragment() {
             dialog.show(childFragmentManager, dialog.tag)
             dialog.quandoEscolheFoto = {
                 when (it) {
-                    "foto" -> { abrirCamera() }
+                    getString(R.string.foto) -> { abrirCamera() }
+
                     else -> { abrirGaleria() }
                 }
             }
@@ -128,8 +125,14 @@ class ClienteFormPerfilPFFragment : Fragment() {
             _binding.clienteFormCadastroPerfilPfFoneCel.setText(clienteLogado.telefoneCel)
             _binding.clienteFormCadastroPerfilPfFoneRes.setText(clienteLogado.telefoneRes)
             _binding.clienteFormCadastroPerfilPfFoneOutr.setText(clienteLogado.telefoneOutro)
-            Log.i("TAG", "preencheCampos: ${clienteLogado.caminhoFoto}")
-            carregaImagem(clienteLogado.caminhoFoto)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (clienteLogado.caminhoFoto != null) {
+                    _binding.clienteFormCadastroPerfilPfImagem.setImageURI(
+                        stringParaUri(clienteLogado.caminhoFoto) )
+                }
+            } else {
+                carregaImagem(clienteLogado.caminhoFoto)
+            }
         }
     }
 
@@ -164,9 +167,14 @@ class ClienteFormPerfilPFFragment : Fragment() {
                 val foneResidencial = _binding.clienteFormCadastroPerfilPfFoneRes.text.toString()
                 val foneOutro = _binding.clienteFormCadastroPerfilPfFoneOutr.text.toString()
                 val genero = _binding.clienteFormCadastroPerfilPfGenero.text.toString()
-                if (_binding.clienteFormCadastroPerfilPfImagem.tag != null) {
-                    caminhoFoto = _binding.clienteFormCadastroPerfilPfImagem.tag as String
-                    Log.i("TAG", "alteraDadosCliente: caminho = $caminhoFoto")
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+                    if (_binding.clienteFormCadastroPerfilPfImagem.tag != null) {
+                        caminhoFoto = _binding.clienteFormCadastroPerfilPfImagem.tag as String
+                    }
+                } else {
+                    uriImagem?.let {
+                        caminhoFoto = uriParaString(uriImagem)
+                    }
                 }
                 atualiza(
                     Cliente(
@@ -221,7 +229,6 @@ class ClienteFormPerfilPFFragment : Fragment() {
         return error
     }
 
-
     private fun atualiza(cliente: Cliente) {
         viewModel.atualiza(cliente).observe(viewLifecycleOwner, Observer {
             it?.dado?.let {
@@ -233,18 +240,15 @@ class ClienteFormPerfilPFFragment : Fragment() {
         val intentCamera = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            Log.i("TAG", "abrirCamera: verso >= S")
             val contentValues = ContentValues()
             contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-            val resolver = getActivity()?.getContentResolver()
+            val resolver = activity?.contentResolver
             uriImagem =
                 resolver?.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
             intentCamera.addFlags(
                 Intent.FLAG_GRANT_READ_URI_PERMISSION or
-                        Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-            )
+                        Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
         } else {
-            Log.i("TAG", "Foto versao < s = ${Build.VERSION.SDK_INT} ")
             val autorizacao = getString(R.string.autorizacao)
             val diretorio =
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
@@ -267,14 +271,16 @@ class ClienteFormPerfilPFFragment : Fragment() {
     }
 
     private fun carregaImagem(caminhoFoto: String?) {
-        if (caminhoFoto != null) {
-            val bitmap = BitmapFactory.decodeFile(caminhoFoto)
-            val bitmapReduzido = Bitmap.createScaledBitmap(bitmap, 300, 300, true)
-            _binding.clienteFormCadastroPerfilPfImagem.setImageBitmap(bitmapReduzido)
-            _binding.clienteFormCadastroPerfilPfImagem.scaleType = ImageView.ScaleType.CENTER_CROP
-            _binding.clienteFormCadastroPerfilPfImagem.tag = caminhoFoto
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+            if (caminhoFoto != null) {
+                val bitmap = BitmapFactory.decodeFile(caminhoFoto)
+                //val bitmapReduzido = Bitmap.createScaledBitmap(bitmap, 300, 300, true)
+                _binding.clienteFormCadastroPerfilPfImagem.setImageBitmap(bitmap)
+                _binding.clienteFormCadastroPerfilPfImagem.scaleType =
+                    ImageView.ScaleType.CENTER_CROP
+                _binding.clienteFormCadastroPerfilPfImagem.tag = caminhoFoto
+            }
         }
-
     }
 
     private fun abrirGaleria() {
@@ -286,14 +292,10 @@ class ClienteFormPerfilPFFragment : Fragment() {
         when {
             permissaoGaleriaAceita -> {
                 resultGaleria.launch(
-                    Intent(
-                        Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-                    )
-                )
+                    Intent(Intent.ACTION_PICK,
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI) )
             }
-            shouldShowRequestPermissionRationale(PERMISSAO_GALERIA) -> showDialogPermissao()
-
+                shouldShowRequestPermissionRationale(PERMISSAO_GALERIA) -> showDialogPermissao()
             else -> requestGaleria.launch(PERMISSAO_GALERIA)
         }
     }
@@ -327,7 +329,6 @@ class ClienteFormPerfilPFFragment : Fragment() {
             if (result.data?.data != null) {
                 val bitmap: Bitmap =
                     if (Build.VERSION.SDK_INT < 28) {
-                        Log.i("TAG", "Galeria versao < 28 = ${Build.VERSION.SDK_INT} ")
                         MediaStore.Images.Media.getBitmap(
                             contextVaiPara.contentResolver,
                             result.data?.data
@@ -335,9 +336,7 @@ class ClienteFormPerfilPFFragment : Fragment() {
                     } else {
                         val source = ImageDecoder.createSource(
                             contextVaiPara.contentResolver,
-                            result.data?.data!!
-                        )
-                        Log.i("TAG", "Galeria versao >= 28 = ${Build.VERSION.SDK_INT} ")
+                            result.data?.data!! )
                         ImageDecoder.decodeBitmap(source)
                     }
                 val photoFile: File? = try {
@@ -360,14 +359,11 @@ class ClienteFormPerfilPFFragment : Fragment() {
                         val output = FileOutputStream(photoFile)
                         stream!!.copyTo(output)
                     }
-                    val uri = Uri.fromFile(photoFile)
-                    _binding.clienteFormCadastroPerfilPfImagem.setImageURI(uri)
+                    uriImagem = Uri.fromFile(photoFile)
+                    _binding.clienteFormCadastroPerfilPfImagem.setImageURI(uriImagem)
                     _binding.clienteFormCadastroPerfilPfImagem.tag = selectedPhotoPath
                 }
                 _binding.clienteFormCadastroPerfilPfImagem.setImageBitmap(bitmap)
-                Log.i("TAG", "Galeria tag = ${_binding.clienteFormCadastroPerfilPfImagem.tag}")
-                Log.i("TAG", "Galeria Camingo abs = $selectedPhotoPath")
-
             }
         }
 
@@ -378,5 +374,13 @@ class ClienteFormPerfilPFFragment : Fragment() {
         val newFile = File(filesDir, "$timeStamp.$ext")
         newFile.createNewFile()
         return newFile
+    }
+
+    private fun uriParaString(valor: Uri?): String {
+        return valor?.toString() ?: ""
+    }
+
+    private fun stringParaUri(valor: String): Uri {
+        return valor?.toUri()
     }
 }

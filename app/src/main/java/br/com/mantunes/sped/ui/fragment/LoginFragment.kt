@@ -1,8 +1,7 @@
 package br.com.mantunes.sped.ui.fragment
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnFocusChangeListener
@@ -29,7 +28,8 @@ class LoginFragment : Fragment() {
         requireContext().applicationContext
             ?: throw IllegalArgumentException(PROBLEMA_EXTRAIR_CONTEXTO)
     }
-
+    private  val TAG = "LoginFragment"
+    
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,12 +66,14 @@ class LoginFragment : Fragment() {
     }
 
     private fun configuraBotaoEntrar() {
+        Log.i(TAG, "configuraBotaoEntrar: ")
+        
         login_entrar_btn.setOnClickListener {
             val email = login_email.text.toString()
             val senha = login_senha.text.toString()
             autentica(email, senha)
         }
-    }
+     }
 
     private fun autentica(email: String, senha: String) {
 

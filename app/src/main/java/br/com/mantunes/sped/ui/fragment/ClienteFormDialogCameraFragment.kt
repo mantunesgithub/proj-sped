@@ -1,17 +1,12 @@
 package br.com.mantunes.sped.ui.fragment
 
-import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import br.com.mantunes.sped.R
-import br.com.mantunes.sped.databinding.ClienteFormCadastroPerfilPfBinding
 import br.com.mantunes.sped.databinding.ClienteFormDialogCamera2Binding
-import br.com.mantunes.sped.ui.fragment.extensions.mostraMsg
 import kotlinx.android.synthetic.main.activity_main.*
 
 class ClienteFormDialogCameraFragment : DialogFragment() {

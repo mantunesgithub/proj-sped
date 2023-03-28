@@ -2,15 +2,18 @@ package br.com.mantunes.sped.ui.fragment
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import br.com.mantunes.sped.R
 import br.com.mantunes.sped.databinding.HomeFragmentBinding
+import br.com.mantunes.sped.di.criaProductCarousel
 import br.com.mantunes.sped.di.criaPromocoes
-import br.com.mantunes.sped.model.Promocao
+import br.com.mantunes.sped.model.ProductCarousel
+import br.com.mantunes.sped.ui.recyclerview.adapter.ProductAdapter
 import br.com.mantunes.sped.ui.viewmodel.LoginViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -32,9 +35,19 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = HomeFragmentBinding.inflate(inflater, container, false)
+
+        val listCarousel = criaProductCarousel()
+
+        val adapter = ProductAdapter(listCarousel)
+
+        _binding.apply {
+            carouselRecyclerciew.adapter = adapter
+            carouselRecyclerciew.set3DItem(true)
+            carouselRecyclerciew.setAlpha(true)
+            carouselRecyclerciew.setInfinite(true)
+        }
         return _binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -49,7 +62,6 @@ class HomeFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager2) { tab, position ->
             tab.text = "Promoção #${position + 1}"
         }.attach()
-
 
         _binding.homeHeaderBtnComprar.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_mainActivity)
